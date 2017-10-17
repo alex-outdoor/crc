@@ -106,8 +106,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': env_var("DATABASE_NAME", 'crc_data'),
-        'USER': env_var("DATABASE_USER", 'root'),
-        'PASSWORD': env_var("DATABASE_PASSWORD", ''),
+        'USER': env_var("DATABASE_USER", 'crc'),
+        'PASSWORD': env_var("DATABASE_PASSWORD", 'crc'),
         'HOST': env_var("DATABASE_HOST", 'localhost'),
         'PORT': env_var("DATABASE_PORT", '3306'),
     }
