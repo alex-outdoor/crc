@@ -1,0 +1,43 @@
+
+.required:after {
+    color: red;
+    content: '*';
+    margin-left: 3px;
+}
+
+table {
+  padding-top: 20px;
+  margin-left: 50px;
+  border-collapse:separate;
+  border-spacing:5px 5px;
+}
+
+tr {
+  text-align: left;
+  padding-top: 20px;
+}
+
+label {
+  margin-right: 20px;
+}
+
+.button {
+  text-align: right;
+}
+
+input {
+  text-align: left;
+}
+
+.table-title {
+  text-align: center;
+}
+
+.hidden-for-bid {
+  display: none;
+}
+
+textarea {
+   resize: none;
+}
+
