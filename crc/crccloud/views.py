@@ -5,7 +5,10 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseForbidden
 from models import Client
 
-def create(request):
+def index(request):
+    return render(request, 'index.html')
+
+def create_client(request):
     if request.method == 'GET':
         data = {}
         return render(request, 'new_client_form.html', data)
@@ -18,3 +21,19 @@ def create(request):
         client.save()
         
         return HttpResponse('Client saved')
+
+def create_bid(request):
+    if request.method == 'GET':
+        data = {}
+        return render(request, 'new_bid_form.html', data)
+
+    if request.method == 'POST':
+        return HttpResponse('BID saved')
+
+def create_respondent(request):
+    if request.method == 'GET':
+        data = {}
+        return render(request, 'new_respondent.html', data)
+
+    if request.method == 'POST':
+        return HttpResponseRedirect('../new_bid/')

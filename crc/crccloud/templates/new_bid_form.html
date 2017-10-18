@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="/crc/new_bid/" method="post">
+  {% csrf_token %}
+  <table>
+    <tr>
+      <td>
+        <label class="control-label required">Currency of quote</label>
+      </td>
+      <td>
+        <input type="text" class="form-control" id="currency" required>
+      </td>
+    </tr>
+  <tr>
+      <td> <label class="control-label required">Client</label></td> <td>
+          <select id="customers_list">
+          </select></td>
+  </tr>
+  <tr>
+      <td> <label class="control-label required">Recruitment duration</label></td> <td> <input class="form-control" type="text" id="recruitment_duration" value=""> </td>
+  </tr>
+  <tr>
+      <td class="title" colspan = "2">&nbsp;</td>
+  </tr>
+  <tr>
+      <td colspan = "2"><a href='../new_respondent/' class="btn">Click to add a respondent group</a></td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Group(s) total</label> </td> <td> <input class="form-control" type="text" id="total_group" disabled> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Respondents total</label> </td> <td> <input class="form-control" type="text" id="total_respondent" disabled> </td>
+  </tr>
+  <tr>
+      <td class="title" colspan = "2">&nbsp;</td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Laptop rentals</label></td> <td> <input class="form-control" type="text" id="laptop_rental" value=""> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Facility rentals</label></td> <td> <input type="text" class="form-control" id="facility_rental" value=""> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Catering for client (estimation only)</label></td> <td> <input class="form-control" type="text" id="catering_client" value=""> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Refreshments for respondents</label></td> <td> <input class="form-control" type="text" id="refreshment_respondent" value=""> </td>
+  </tr>
+  <tr>
+      <td class="title" colspan = "2">&nbsp;</td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Moderator briefing-debriefing</label></td> <td> <input class="form-control" type="text" id="moderator" value=""> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> <td> <input class="form-control" type="text" id="moderation_travel" value=""> </td>
+  </tr>
+  <tr>
+      <td class="title" colspan = "2">&nbsp;</td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Estimation of # words to be translated</label></td> <td> <input class="form-control" type="text" id="translation_words" value=""> </td>
+  </tr>
+  <tr>
+      <td> <label class="control-label">Simultaneous translation for Montreal</label></td> <td> <input class="form-control" type="text" id="simultaneous_translator" value=""> </td>
+  </tr>
+  <tr>
+      <td class="title" colspan = "2">&nbsp;</td>
+  </tr>
+  <tr>
+      <td> <label class="control-label required">Project management cost</label></td> <td> <input class="form-control" type="text" id="project_management" value=""> </td>
+  </tr>
+  </table>
+  <!-- Deliverables table -->
+  <table id="deliverables" class="deliverables">
+      <tr class='table-title'>
+          <td><label class="control-label">Deliverables</label></td><td><label class="control-label">Unit cost</label></td><td><label class="control-label">Quantity</label></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Transcripts from English to English</label></td><td><input class="form-control" type="text" id="english_to_english_cost" value=""></td><td><input class="form-control" type="text" id="english_to_english_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Transcripts from French to English</label></td><td><input class="form-control" type="text" id="french_to_english_cost" value=""></td><td><input class="form-control" type="text" id="french_to_english_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Content Analysis</label></td><td><input class="form-control" type="text" id="content_analysis_cost" value=""></td><td><input class="form-control" type="text" id="content_analysis_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Topline report</label></td><td><input class="form-control" type="text" id="topline_report_cost" value=""></td><td><input class="form-control" type="text" id="topline_report_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Full Report</label></td><td><input class="form-control" type="text" id="full_report_cost" value=""></td><td><input class="form-control" type="text" id="full_report_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Summary</label></td><td><input class="form-control" type="text" id="summary_cost" value=""></td><td><input class="form-control" type="text" id="summary_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Discussion Guide Design</label></td><td><input class="form-control" type="text" id="discussion_guide_design_cost" value=""></td><td><input class="form-control" type="text" id="discussion_guide_design_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td><label class="control-label">Screener Design</label></td><td><input class="form-control" type="text" id="screener_design_cost" value=""></td><td><input class="form-control" type="text" id="screener_design_qty" value="0"></td>
+      </tr>
+      <tr>
+          <td class="title" colspan = "3">&nbsp;</td>
+      </tr>
+      <tr>
+          <td colspan = "3"> <textarea class="form-control" id="notes" rows="5" placeholder="Notes"></textarea> </td>
+      </tr>
+      <tr>
+        <td class="button" colspan="3">
+          <button id="cancel" type="button" class="btn btn-default">Cancel</button>
+          <button id="save" type="button" class="btn btn-primary">Save</button>
+        </td>
+      </tr>
+  </table>
+</form> 
+{% endblock %}

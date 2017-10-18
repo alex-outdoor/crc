@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static "css/crc.css" %}">
+  <meta charset="UTF-8">
+  <title> CRC Platform </title>
+</head>
+
+<body>
+  {% block sidebar %}
+
+  {% endblock %}
+  
+  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+</body>
+
+</html>
