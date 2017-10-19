@@ -19,21 +19,20 @@ def create_client(request):
         client = Client()
         client.create_from_dict(data, 'user')
         client.save()
-        
+
         return HttpResponse('Client saved')
 
 def create_bid(request):
     if request.method == 'GET':
-        data = {}
-        return render(request, 'new_bid_form.html', data)
+        return render(request, 'new_bid_form.html')
 
     if request.method == 'POST':
+        data = request.POST
+        #print data.get('topic', None)
+        print data.get('nbr_respondent_0', None)
+        #print data.get('english_to_english_cost', None)
         return HttpResponse('BID saved')
 
 def create_respondent(request):
     if request.method == 'GET':
-        data = {}
-        return render(request, 'new_respondent.html', data)
-
-    if request.method == 'POST':
-        return HttpResponseRedirect('../new_bid/')
+        return render(request, 'new_respondent.html')

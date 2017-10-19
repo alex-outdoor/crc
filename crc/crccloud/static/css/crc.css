@@ -6,8 +6,8 @@
 }
 
 table {
-  padding-top: 20px;
-  margin-left: 50px;
+  padding-top: 10px;
+  margin-left: 20px;
   border-collapse:separate;
   border-spacing:5px 5px;
 }
@@ -29,8 +29,9 @@ input {
   text-align: left;
 }
 
-.table-title {
+h2 {
   text-align: center;
+  margin-top: 10px;
 }
 
 .hidden-for-bid {
@@ -41,3 +42,25 @@ textarea {
    resize: none;
 }
 
+.right { 
+  text-align: right;
+}
+
+.top-align {
+  vertical-align: top;
+}
+
+.hidden {
+  display: none;
+}
+
+.bid_button{
+  margin-left: 50px;
+  margin-top:15px;
+}
+
+#save {
+  float: right;
+  margin-right: 50px;
+  margin-bottom: 30px;
+}

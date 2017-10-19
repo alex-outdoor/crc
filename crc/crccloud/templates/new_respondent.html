@@ -1,114 +1,120 @@
-{% extends "base.html" %}
-{% block content %}
-<form action="/crc/new_respondent/" method="post">
-  {% csrf_token %}
-  <table id="basic_info">
-      <tr>
-          <td> <label class="control-label required">How many people (N) ?</label></td> <td> <input class="form-control" type="text" id="nbr_respondent" value=""> </td>
-      </tr>
-      <tr>
-          <td> <label class="control-label required">Type of respondent</label> </td> <td> <input class="form-control" type="text" id="type_respondent" value=""> </td>
-      </tr>
-      <tr>
-          <td> <label class="control-label required">City</label> </td> <td> <input class="form-control" type="text" id="city" value=""> </td>
-      </tr>
-      <tr>
-          <td> <label class="control-label required">Incentive</label> </td> <td> <input class="form-control" type="text" id="incentive" value=""> </td>
-      </tr>
-      <tr>
-          <td> <label class="control-label required">Recruitment cost</label> </td> <td> <input class="form-control" type="text" id="recruitment_cost" value=""> </td>
-      </tr>
-      <tr>
-          <td> <label class="control-label required">Language</label> </td> <td> <select class="form-control" id="language">
-                                      <option value="english">English</option>
-                                      <option value="french">French</option>
-                                      <option value="french">English and French</option>
-                                  </select>
-      </tr>
-  </table>
+{% verbatim %}
+<table>
+  <tr>
+    <td class="top-align">
+      <table>
+        <tr>
+            <td colspan = "2"> <label class="control-label"><h3>Respondent group N&#176; {{ i }}</h3></label></td> <td></td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">How many people (N) ?</label></td> <td> <input class="form-control" type="text" name="nbr_respondent" id="nbr_respondent" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label">Over-recruitment people ?</label></td> <td><input class="form-control" type="text" name="nbr_over_recruitment" id="nbr_over_recruitment" value=""></td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">Type of respondent</label> </td> <td> <input class="form-control" type="text" name="type_respondent" id="type_respondent" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">City</label> </td> <td> <input class="form-control" type="text" id="city" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">Incentive</label> </td> <td> <input class="form-control" type="text" id="incentive" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">Duration</label> </td> <td> <input class="form-control" type="text" id="duration" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label required">Recruitment cost</label> </td> <td> <input class="form-control" type="text" id="recruitment_cost" value=""> </td>
+        </tr>
+        <tr>
+            <td> <label class="control-label">Language</label> </td> <td> <select class="form-control" id="language">
+                                        <option value=""></option>
+                                        <option value="english">English</option>
+                                        <option value="french">French</option>
+                                        <option value="french">English and French</option>
+                                    </select>
+        </tr>
+      </table>
 
-  <table id="methodology">
-  <tr id="title" class='table-title'>
-      <td> <label class="control-label">Check if applicable</label> </td>
-      <td> <label class="control-label">Type of test</label> </td>
-      <td> <label class="control-label">Duration</label> </td>
-      <td class='hidden-for-bid'>Start date</td>
-      <td class='hidden-for-bid'>End date</td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="tdi" class="select"></td>
-      <td> <label class="control-label">TDI</label> </td>
-      <td><input class="form-control" type="text" id="tdi_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="tdi_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="tdi_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="focus_group" class="select"></td>
-      <td> <label class="control-label">Focus Group (including Dyad and triads)</label> </td>
-      <td><input class="form-control" type="text" id="focus_group_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="focus_group_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="focus_group_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="idi" class="select"> </td>
-      <td> <label class="control-label">IDI</label> </td>
-      <td><input class="form-control" type="text" id="idi_duration" value=""></td>
-      <td><input class='hidden-for-bid' type="date" id="idi_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="idi_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="web_tdi" class="select"></td>
-      <td> <label class="control-label">Web-TDI</label> </td>
-      <td><input class="form-control" type="text" id="web_tdi_duration" style="visibility: hidden"></td>
-      <td><input class='hidden-for-bid' type="date" id="web_tdi_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="web_tdi_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="ethnographic_interview" class="select"></td>
-      <td> <label class="control-label">Ethnographic Interview</label> </td>
-      <td><input class="form-control" type="text" id="ethnographic_interview_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="ethnographic_interview_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="ethnographic_interview_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="online_focus_group" class="select"> </td>
-      <td> <label class="control-label">Online Focus Group</label> </td>
-      <td><input class="form-control" type="text" id="online_focus_group_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="online_focus_group_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="online_focus_group_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="olbb" class="select"></td>
-      <td> <label class="control-label">OLBB</label> </td>
-      <td><input class="form-control" type="text" id="olbb_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="olbb_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="olbb_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="taste_test" class="select"> </td>
-      <td> <label class="control-label">Taste Test</label> </td>
-      <td><input class="form-control" type="text" id="taste_test_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="taste_test_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="taste_test_end_date"></td>
-  </tr>
-  <tr>
-      <td><input type="checkbox" id="other_test" class="select"> </td>
-      <td><input class="form-control" type="text" placeholder="Other, specify" id="other_test_name"></td>
-      <td><input class="form-control" type="text" id="other_test_duration"></td>
-      <td><input class='hidden-for-bid' type="date" id="other_test_start_date"></td>
-      <td><input class='hidden-for-bid' type="date" id="other_test_end_date"></td>
-  </tr>
-  <tr>
-      <td colspan = "5"> <textarea class="form-control" id="notes" rows="5" placeholder="Notes"></textarea> </td>
-  </tr>
-  <tr>
-    <td class="button" colspan="5">
-      <button id="cancel" type="button" class="btn btn-default">Cancel</button>
-      <button id="save" type="submit" class="btn btn-primary">Save</button>
-      <button id="save_empty" type="button" class="btn btn-info">Save & add another</button>
-      <button id="save_duplicate" type="button" class="btn btn-info">Save & duplicate</button>
-    </td>
-  </tr>
-  </table>
-</form>
-{% endblock %}
+      </td>
+      <td>
+        <table>
+        <tr id="title" class='table-title'>
+            <td> <label class="control-label required">Check to select a methodology</label> </td>
+            <td class='hidden-for-bid'> <label class="control-label">Methodologies</label> </td>
+            <td class='hidden-for-bid'> <label class="control-label">Duration</label> </td>
+            <td class='hidden-for-bid'>Start date</td>
+            <td class='hidden-for-bid'>End date</td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="tdi" class="select"></td>
+            <td> <label class="control-label">TDI</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="tdi_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="tdi_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="tdi_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="focus_group" class="select"></td>
+            <td> <label class="control-label">Focus Group (including Dyad and triads)</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="focus_group_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="focus_group_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="focus_group_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="idi" class="select"> </td>
+            <td> <label class="control-label">IDI</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="idi_duration" value=""></td>
+            <td><input class='hidden-for-bid' type="date" id="idi_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="idi_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="web_tdi" class="select"></td>
+            <td> <label class="control-label">Web-TDI</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="web_tdi_duration" style="visibility: hidden"></td>
+            <td><input class='hidden-for-bid' type="date" id="web_tdi_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="web_tdi_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="ethnographic_interview" class="select"></td>
+            <td> <label class="control-label">Ethnographic Interview</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="ethnographic_interview_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="ethnographic_interview_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="ethnographic_interview_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="online_focus_group" class="select"> </td>
+            <td> <label class="control-label">Online Focus Group</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="online_focus_group_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="online_focus_group_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="online_focus_group_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="olbb" class="select"></td>
+            <td> <label class="control-label">OLBB</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="olbb_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="olbb_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="olbb_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="taste_test" class="select"> </td>
+            <td> <label class="control-label">Taste Test</label> </td>
+            <td><input class='hidden-for-bid' type="text" id="taste_test_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="taste_test_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="taste_test_end_date"></td>
+        </tr>
+        <tr>
+            <td><input type="checkbox" id="other_test" class="select"> </td>
+            <td><input class="form-control" type="text" placeholder="Other, specify" id="other_test_name"></td>
+            <td><input class='hidden-for-bid' type="text" id="other_test_duration"></td>
+            <td><input class='hidden-for-bid' type="date" id="other_test_start_date"></td>
+            <td><input class='hidden-for-bid' type="date" id="other_test_end_date"></td>
+        </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+        <td colspan = "2"> <textarea class="form-control" id="notes" rows="5" placeholder="Notes"></textarea> </td>
+    </tr>
+</table>
+{% endverbatim %}
