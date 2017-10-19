@@ -6,10 +6,11 @@
 }
 
 table {
-  padding-top: 20px;
-  margin-left: 50px;
+  margin-top: 20px;
+  margin-left: 20px;
   border-collapse:separate;
   border-spacing:5px 5px;
+  background-color: lightblue;
 }
 
 tr {
@@ -19,6 +20,7 @@ tr {
 
 label {
   margin-right: 20px;
+  margin-left: 20px;
 }
 
 .button {
@@ -29,8 +31,14 @@ input {
   text-align: left;
 }
 
-.table-title {
-  text-align: center;
+h2 {
+  margin-left: 40px;
+  margin-top: 10px;
+}
+
+h3 {
+  margin-top: 10px;
+  font-size: 150%;
 }
 
 .hidden-for-bid {
@@ -41,3 +49,37 @@ textarea {
    resize: none;
 }
 
+.right { 
+  text-align: right;
+}
+
+.top-align {
+  vertical-align: top;
+}
+
+.hidden {
+  display: none;
+}
+
+.bid_button{
+  margin-left: 20px;
+  margin-top:20px;
+}
+
+#save {
+  float: right;
+  margin-right: 50px;
+  margin-bottom: 30px;
+}
+
+.table-title {
+  text-align: center;
+}
+
+.select { 
+  margin-left: 50px;
+}
+
+.vertical { 
+  vertical-align: middle;
+}
