@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-cookies.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+  
+  <script type="text/javascript" src="{% static 'controllers/FormController.js' %}"></script>
+  <script type="text/javascript" src="{% static 'controllers/Authentification.js' %}"></script>
+  {% block styles %}<!-- Import here style-specific css -->{% endblock %}
+  {% block controllers %}<!-- Import here controller-specific JS -->{% endblock %}
+  <link rel="stylesheet" href="{% static "css/sidebar.css" %}"> 
+  <meta charset="UTF-8">
+  <title> CRC Platform </title>
+</head>
+
+<body>
+  
+  <div id="sidebar">
+    <!-- Sidebar will be kept in all pages to navigate -->
+    <img src="/static/img/crc_logo.jpg">
+    {% if user.is_authenticated %}
+    <ul id="sidebar_ul">
+        <li><a href="/crc/" class="btn btn-outline-primary btn-block">Home</a></li>
+        <li><a href="/crc/new_client/" class="btn btn-outline-primary btn-block">Create a new client</a></li>
+        <li><a href="/crc/list_clients/" class="btn btn-outline-primary btn-block">View clients list</a></li>
+        <li>&nbsp;</li>
+        <li><a href="/crc/new_bid/" class="btn btn-outline-primary btn-block">Create a new BID</a></li>
+        <li><a href="/crc/new_bid/" class="btn btn-outline-primary btn-block disabled">View BID list</a></li>
+        <li>&nbsp;</li>
+        <li><a href="/crc/new_bid/" class="btn btn-outline-primary btn-block disabled">Create a project</a></li>
+        <li><a href="/crc/new_bid/" class="btn btn-outline-primary btn-block disabled">Project tracker</a></li>
+        <li><a href="/crc/new_bid/" class="btn btn-outline-primary btn-block disabled">View all projects</a></li>
+        <li>&nbsp;</li>
+        <li><a href="/logout/" class="btn btn-outline-primary btn-block">Logout</a></li>
+    </ul>
+    {% endif %}
+  </div>
+
+  <div id="main">
+  {% block content %}<!-- default content text (typically empty) -->{% endblock %}
+</div>
+
+</body>
+
+</html>

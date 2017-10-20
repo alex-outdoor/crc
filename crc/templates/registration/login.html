@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div ng-app="auth" ng-controller="Authentification">
+  <h2>Login</h2>
+  <form action="/login/" method="post" ng-init="init()">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Login</button>
+  </form>
+  <br>
+  <p class="control-label">First time here ? Register <a href="/register/">here</a></p>
+</div>
+{% endblock %}

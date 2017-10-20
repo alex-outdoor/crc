@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/list_clients.css' %}">
+{% endblock %}
+
+{% block controllers %}
+  <script type="text/javascript" src="{% static 'controllers/ClientListing.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+<h2 class="control-label"> Clients list </h2>
+<div ng-app="clientListing" ng-controller="ClientListing">
+  <table width="1000" cellspacing="10" cellpadding="10" class="table-striped" ng-init="init()">
+    <thead>
+    <tr>
+      <td></td>
+      <td><label class="control-label">Company</label></td>
+      <td><label class="control-label">Contact name</label></td>
+      <td><label class="control-label">Contact email</label></td>
+      <td><label class="control-label">Main phone</label></td>
+      <td><label class="control-label">Province</label></td>
+      <td><label class="control-label">Country</label></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in data_list | orderBy:sortType:sortReverse">
+      <th scope="row">{{$index + 1}}</th>
+      <td> {{ item.company_name }} </td>
+      <td> {{ item.contact_name }} </td>
+      <td> {{ item.contact_email }} </td>
+      <td> {{ item.main_phone }} </td>
+      <td> {{ item.province }} </td>
+      <td> {{ item.country }} </td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+{% endverbatim %}
+{% endblock %}

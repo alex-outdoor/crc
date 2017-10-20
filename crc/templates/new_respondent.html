@@ -1,5 +1,5 @@
 {% verbatim %}
-      <table>
+      <table class="bg-primary text-white">
         <tr>
             <td colspan = "3"> <label class="control-label"><h3>Respondent group N&#176; {{ i }}</h3></label></td>
             <td class='hidden-for-bid'> <label class="control-label">Methodologies</label> </td>
@@ -9,8 +9,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">How many people (N) ?</label></td> 
-            <td> <input class="form-control" type="text" name="nbr_respondent" id="nbr_respondent" value="" required></td>
-            <td><input type="radio" name="radio" id="taste_test" class="select"> </td>
+            <td> <input class="form-control" type="text" name="nbr_respondent_{{$index}}" id="nbr_respondent" value="" required></td>
+            <td><input type="radio" name="radio_{{$index}}" value="taste_test" class="select"> </td>
             <td> <label class="control-label vertical">Taste Test</label> </td>
             <td><input class='hidden-for-bid' type="text" id="taste_test_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="taste_test_start_date"></td>
@@ -18,9 +18,9 @@
 
         </tr>
         <tr>
-            <td> <label class="control-label">Over-recruitment people ?</label></td> 
-            <td><input class="form-control" type="text" name="nbr_over_recruitment" id="nbr_over_recruitment" value=""></td>
-            <td><input type="radio" name="radio" id="tdi" class="select"></td>
+            <td> <label class="control-label">Over-recruitment ?</label></td> 
+            <td><input class="form-control" type="text" name="nbr_over_recruitment_{{$index}}" id="nbr_over_recruitment" value=""></td>
+            <td><input type="radio" name="radio_{{$index}}" value="tdi" class="select"></td>
             <td> <label class="control-label">TDI</label> </td>
             <td><input class='hidden-for-bid' type="text" id="tdi_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="tdi_start_date"></td>
@@ -28,8 +28,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Type of respondent</label> </td> 
-            <td> <input class="form-control" type="text" name="type_respondent" id="type_respondent" value="" required> </td>
-            <td><input type="radio" name="radio" id="focus_group" class="select"></td>
+            <td> <input class="form-control" type="text" name="type_respondent_{{$index}}" id="type_respondent" value="" required> </td>
+            <td><input type="radio" name="radio_{{$index}}" value="focus_group" class="select"></td>
             <td> <label class="control-label">Focus Group (including Dyad and triads)</label> </td>
             <td><input class='hidden-for-bid' type="text" id="focus_group_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="focus_group_start_date"></td>
@@ -37,8 +37,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">City</label> </td> 
-            <td> <input class="form-control" type="text" id="city" value="" required> </td>
-            <td><input type="radio" name="radio" id="idi" class="select"> </td>
+            <td> <input class="form-control" type="text" name="city_{{$index}}" value="" required> </td>
+            <td><input type="radio" name="radio_{{$index}}" value="idi" class="select"> </td>
             <td> <label class="control-label">IDI</label> </td>
             <td><input class='hidden-for-bid' type="text" id="idi_duration" value=""></td>
             <td><input class='hidden-for-bid' type="date" id="idi_start_date"></td>
@@ -46,8 +46,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Incentive</label> </td> 
-            <td> <div class="input-group"><input class="form-control" type="text" id="incentive" value="" required> <span class="input-group-addon">$</span></div></td>
-            <td><input type="radio" name="radio" id="web_tdi" class="select"></td>
+            <td> <div class="input-group"><input class="form-control" type="text" name="incentive_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
+            <td><input type="radio" name="radio_{{$index}}" value="web_tdi" class="select"></td>
             <td> <label class="control-label">Web-TDI</label> </td>
             <td><input class='hidden-for-bid' type="text" id="web_tdi_duration" style="visibility: hidden"></td>
             <td><input class='hidden-for-bid' type="date" id="web_tdi_start_date"></td>
@@ -55,8 +55,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Duration</label> </td> 
-            <td> <input class="form-control" type="text" id="duration" value="" required> </td>
-            <td><input type="radio" name="radio" id="ethnographic_interview" class="select"></td>
+            <td> <input class="form-control" type="text" name="duration_{{$index}}" value="" required> </td>
+            <td><input type="radio" name="radio_{{$index}}" value="ethnographic_interview" class="select"></td>
             <td> <label class="control-label">Ethnographic Interview</label> </td>
             <td><input class='hidden-for-bid' type="text" id="ethnographic_interview_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="ethnographic_interview_start_date"></td>
@@ -64,8 +64,8 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Recruitment cost</label> </td> 
-            <td> <div class="input-group"><input class="form-control" type="text" id="recruitment_cost" value="" required> <span class="input-group-addon">$</span></div></td>
-            <td><input type="radio" name="radio" id="online_focus_group" class="select"> </td>
+            <td> <div class="input-group"><input class="form-control" type="text" name="recruitment_cost_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
+            <td><input type="radio" name="radio_{{$index}}" value="online_focus_group" class="select"> </td>
             <td> <label class="control-label">Online Focus Group</label> </td>
             <td><input class='hidden-for-bid' type="text" id="online_focus_group_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="online_focus_group_start_date"></td>
@@ -73,14 +73,14 @@
         </tr>
         <tr>
             <td> <label class="control-label">Language</label> </td> 
-            <td> <select class="form-control" id="language">
+            <td> <select class="form-control" name="language_{{$index}}">
                                         <option value=""></option>
                                         <option value="english">English</option>
                                         <option value="french">French</option>
                                         <option value="french">English and French</option>
                                     </select>
             </td>
-            <td><input type="radio" name="radio" id="olbb" class="select"></td>
+            <td><input type="radio" name="radio_{{$index}}" value="olbb" class="select"></td>
             <td> <label class="control-label">OLBB</label> </td>
             <td><input class='hidden-for-bid' type="text" id="olbb_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="olbb_start_date"></td>
@@ -89,14 +89,14 @@
         <tr>
             <td> </td>
             <td> </td>
-            <td><input type="radio" name="radio" id="other_test" class="select"> </td>
-            <td><input class="form-control" type="text" placeholder="Other, specify" id="other_test_name"></td>
+            <td><input type="radio" name="radio_{{$index}}" value="other_test" class="select"> </td>
+            <td><input class="form-control" type="text" placeholder="Other, specify" name="other_test_name_{{$index}}"></td>
             <td><input class='hidden-for-bid' type="text" id="other_test_duration"></td>
             <td><input class='hidden-for-bid' type="date" id="other_test_start_date"></td>
             <td><input class='hidden-for-bid' type="date" id="other_test_end_date"></td>
         </tr>
         <tr>
-          <td colspan = "7"> <textarea class="form-control" id="notes" rows="5" placeholder="Notes related to this respondent group"></textarea> </td>
+          <td colspan = "7"> <textarea class="form-control" name="notes_respondent_{{$index}}" rows="5" placeholder="Notes related to this respondent group"></textarea> </td>
         </tr>
       </table>
 

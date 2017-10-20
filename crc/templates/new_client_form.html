@@ -1,14 +1,21 @@
 {% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/new_client_form.css' %}">
+{% endblock %}
+
 {% block content %}
+<h2 class="control-label"> Client creation page </h2>
   <form action="/crc/new_client/" method="post">
     {% csrf_token %}
-  <table>
+  <table class="bg-primary text-white">
     <tr>
       <td>
         <label class="control-label required">Company</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="company" name="company" required>
+        <input type="text" class="form-control" id="company_name" name="company_name" required>
       </td>
     </tr>
     <tr>
@@ -16,7 +23,7 @@
         <label class="control-label required">Contact name</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="contact" name="contact" required>
+        <input type="text" class="form-control" id="contact_name" name="contact_name" required>
       </td>
     </tr>
     <tr>
@@ -64,7 +71,7 @@
         <label class="control-label required">Email</label>
       </td>
       <td>
-        <input type="email" class="form-control" id="email" name="email" required>
+        <input type="email" class="form-control" id="contact_email" name="contact_email" required>
       </td>
     </tr>
     <tr>
@@ -93,14 +100,13 @@
     </tr>
     <tr>
       <td colspan="2">
-        <textarea class="form-control" rows="3" id="notes" name="notes" placeholder="Notes"></textarea>
-      </td>
-    </tr>
-    <tr>
-      <td class="button" colspan="2">
-        <button id="save" type="submit" class="btn btn-primary">Save</button>
+        <textarea class="form-control" rows="3" id="notes" name="notes" placeholder="Notes about this client"></textarea>
       </td>
     </tr>
   </table>
+
+  <!-- Saving button -->
+  <button id="save" type="submit" class="btn btn-primary">Save</button>
+
 </form> 
 {% endblock %}

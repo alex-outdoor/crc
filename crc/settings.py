@@ -53,6 +53,10 @@ SECRET_KEY = 'eoq+5sbzn15(&a-ool3j20ifyvwt68_5_k+7uo8(pv!te1-lp%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+LOGIN_REDIRECT_URL = '/crc/'
+LOGOUT_REDIRECT_URL = '/crc/'
+LOGIN_URL = '/login/'
+
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '192.168.10.6', 'localhost', '[::1]']
 
 # Application definition
@@ -64,7 +68,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'crccloud',
+    'authentification',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -82,7 +89,7 @@ ROOT_URLCONF = 'urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'crc/templates/'),],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,6 +119,14 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ], 
+    'PAGE_SIZE': 100
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

@@ -1,15 +1,14 @@
-
 .required:after {
-    color: red;
-    content: '*';
-    margin-left: 3px;
+  color: red;
+  content: "*";
+  margin-left: 3px;
 }
 
 table {
   margin-top: 20px;
   margin-left: 20px;
-  border-collapse:separate;
-  border-spacing:5px 5px;
+  border-collapse: separate;
+  border-spacing: 5px 5px;
   background-color: lightblue;
 }
 
@@ -46,10 +45,10 @@ h3 {
 }
 
 textarea {
-   resize: none;
+  resize: none;
 }
 
-.right { 
+.right {
   text-align: right;
 }
 
@@ -61,9 +60,9 @@ textarea {
   display: none;
 }
 
-.bid_button{
+.bid_button {
   margin-left: 20px;
-  margin-top:20px;
+  margin-top: 20px;
 }
 
 #save {
@@ -76,10 +75,10 @@ textarea {
   text-align: center;
 }
 
-.select { 
+.select {
   margin-left: 50px;
 }
 
-.vertical { 
+.vertical {
   vertical-align: middle;
 }
