@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/list_clients.css' %}">
+{% endblock %}
+
+{% block controllers %}
+  <script type="text/javascript" src="{% static 'controllers/BidListing.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+<h2 class="control-label"> Bids list </h2>
+<div ng-app="bidListing" ng-controller="BidListing">
+  <table width="1000" cellspacing="10" cellpadding="10" class="table-striped" ng-init="init()">
+    <thead>
+    <tr>
+      <td></td>
+      <td><label class="control-label">Topic</label></td>
+      <td><label class="control-label">Currency</label></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="item in data_list | orderBy:sortType:sortReverse">
+      <th scope="row">{{$index + 1}}</th>
+      <td> <a href="{{ base_url }}/crc/new_bid/{{ item.id }}">{{ item.topic }}</a> </td>
+      <td> {{ item.currency }} </td>
+    </tr>
+  </tbody>
+  </table>
+</div>
+
+{% endverbatim %}
+{% endblock %}

@@ -36,6 +36,13 @@ def edit_client(request, client_id):
         client = Client.objects.get(id=client_id)
         data = client.as_dict()
         return render(request, 'new_client_form.html', data)
+    
+@login_required
+def edit_bid(request, bid_id):
+    if request.method == 'GET':
+        bid = Bid.objects.get(id=bid_id)
+        data = bid.as_dict()
+        return render(request, 'new_bid_form.html', data)
 
 @login_required
 def create_bid(request):
@@ -97,7 +104,7 @@ def list_clients(request):
 @login_required
 def list_bids(request):
     if request.method == 'GET':
-        return HttpResponse(200)
+        return render(request, 'list_bids.html', {})
         
         
         

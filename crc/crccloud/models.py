@@ -168,6 +168,11 @@ class Bid(Base):
         self.facility_rental_unit_cost = float(get_attribute_value(data,'facility_unit_cost'))
         self.notes = data.get('notes_bid', '')
         return self
+    
+    def as_dict(self):
+        return {
+            'topic': self.topic,
+        }
 
 # Definition of a respondent group
 class Respondent(Base):

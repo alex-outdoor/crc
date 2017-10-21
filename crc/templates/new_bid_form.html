@@ -10,14 +10,14 @@
 <div ng-app="form" ng-controller="FormController">
 <form action="/crc/new_bid/" method="post" ng-init="load()">
   {% csrf_token %}
-  {% verbatim %}
+  
   <!-- Disable field doesn't send info ? -->
   <input class="hidden" name="translation_total2" id="translation_total2" value="">
   
   <table class="bg-primary text-white">
     <tr>
         <td> <label class="control-label required">Topic</label></td> 
-        <td> <input class="form-control" type="text" id="topic" name="topic" value="" required> </td>
+        <td> <input class="form-control" type="text" id="topic" name="topic" value={{topic}} required> </td>
         <td> <label class="control-label">Moderator briefing-debriefing</label></td> 
         <td> <div class="input-group"><input class="form-control" type="text" id="moderator_briefing" name="moderator_briefing" value=""> <span class="input-group-addon">$</span></div></td>
     </tr>
@@ -30,11 +30,13 @@
   <tr>
       <td> <label class="control-label">Client (from database)</label></td> 
       <td>
+          {% verbatim %}
           <select name="client_id">
             <option ng-repeat="client in clients" value="{{client.id}}">
               {{client.company_name }} - {{client.contact_name}}
             </option>
           </select>
+          {% endverbatim %}
       </td>
       <td> <label class="control-label">Moderation : </label></td> 
       <td></td>
@@ -109,7 +111,7 @@
       <td colspan = "4"> <textarea class="form-control" name="notes_bid" rows="5" placeholder="Notes about the BID"></textarea> </td>
   </tr>
 </table>
-{% endverbatim %}
+
 
   <!-- Respondents form -->
   <button id="respondent_button_add" type="button" ng-click="add_respondent()" class="btn btn-secondary bid_button">Add respondent group(s)</button>
