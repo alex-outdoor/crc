@@ -10,6 +10,8 @@ app.controller("ClientListing", [
 
     $scope.init = function() {
       url = "http://" + location.host + "/api/clients/";
+      
+      $scope.base_url = url = "http://" + location.host;
       // API call
       $http.get(url).success(function(data, status, headers, config) {
         $scope.data_list = [];

@@ -15,7 +15,7 @@
         <label class="control-label required">Company</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="company_name" name="company_name" required>
+        <input type="text" class="form-control" id="company_name" name="company_name" value="{{company_name}}" required>
       </td>
     </tr>
     <tr>
@@ -23,7 +23,7 @@
         <label class="control-label required">Contact name</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="contact_name" name="contact_name" required>
+        <input type="text" class="form-control" id="contact_name" name="contact_name" value="{{contact_name}}" required>
       </td>
     </tr>
     <tr>
@@ -31,7 +31,7 @@
         <label class="control-label required">Address</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="address" name="address" required>
+        <input type="text" class="form-control" id="address" name="address" value="{{address}}" required>
       </td>
     </tr>
     <tr>
@@ -39,7 +39,7 @@
         <label class="control-label">Postal code</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="postal_code" name="postal_code">
+        <input type="text" class="form-control" id="postal_code" name="postal_code" value="{{postal_code}}">
       </td>
     </tr>
     <tr>
@@ -47,7 +47,7 @@
         <label class="control-label">City</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="city" name="city">
+        <input type="text" class="form-control" id="city" name="city" value="{{city}}">
       </td>
     </tr>
     <tr>
@@ -55,7 +55,7 @@
         <label class="control-label">Province</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="province" name="province">
+        <input type="text" class="form-control" id="province" name="province" value="{{province}}">
       </td>
     </tr>
     <tr>
@@ -63,7 +63,7 @@
         <label class="control-label required">Country</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="country" name="country" required>
+        <input type="text" class="form-control" id="country" name="country" value="{{country}}" required>
       </td>
     </tr>
     <tr>
@@ -71,7 +71,7 @@
         <label class="control-label required">Email</label>
       </td>
       <td>
-        <input type="email" class="form-control" id="contact_email" name="contact_email" required>
+        <input type="email" class="form-control" id="contact_email" name="contact_email" value="{{contact_email}}" required>
       </td>
     </tr>
     <tr>
@@ -79,7 +79,7 @@
         <label class="control-label required">Main phone</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="main_phone" name="main_phone" required>
+        <input type="text" class="form-control" id="main_phone" name="main_phone" value="{{main_phone}}" required>
       </td>
     </tr>
     <tr>
@@ -87,7 +87,7 @@
         <label class="control-label">Direct number</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="direct_number" name="direct_number">
+        <input type="text" class="form-control" id="direct_number" name="direct_number" value="{{direct_number}}">
       </td>
     </tr>
     <tr>
@@ -95,12 +95,12 @@
         <label class="control-label">Fax</label>
       </td>
       <td>
-        <input type="text" class="form-control" id="fax" name="fax">
+        <input type="text" class="form-control" id="fax" name="fax" value="{{fax}}">
       </td>
     </tr>
     <tr>
       <td colspan="2">
-        <textarea class="form-control" rows="3" id="notes" name="notes" placeholder="Notes about this client"></textarea>
+        <textarea class="form-control" rows="3" id="notes" placeholder="Notes about this client" name="notes">{{notes}}</textarea>
       </td>
     </tr>
   </table>

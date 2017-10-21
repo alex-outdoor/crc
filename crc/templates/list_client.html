@@ -29,7 +29,7 @@
   <tbody>
     <tr ng-repeat="item in data_list | orderBy:sortType:sortReverse">
       <th scope="row">{{$index + 1}}</th>
-      <td> {{ item.company_name }} </td>
+      <td> <a href="{{ base_url }}/crc/new_client/{{ item.id }}">{{ item.company_name }}</a> </td>
       <td> {{ item.contact_name }} </td>
       <td> {{ item.contact_email }} </td>
       <td> {{ item.main_phone }} </td>

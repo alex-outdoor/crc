@@ -52,8 +52,15 @@ class Client(Base):
             'company_name': self.company_name,
             'contact_name': self.contact_name,
             'contact_email': self.contact_email,
-            'created by': self.created_by.name, 
-            'created': self.created_date
+            'address': self.address,
+            'postal_code': self.postal_code,
+            'city': self.city,
+            'province': self.province,
+            'country': self.country,
+            'main_phone': self.main_phone,
+            'direct_number': self.direct_number,
+            'fax': self.fax,
+            'notes': self.notes,
         }
 
     def create_from_dict(self, data, user):
@@ -172,7 +179,7 @@ class Respondent(Base):
         help_text="Number of respondent(s)")
     over_recruitment = models.FloatField(blank=True, null=True,
         help_text="Over recruitment")
-    bid = models.ForeignKey("Bid", related_name="info_bid",
+    bid = models.ForeignKey("Bid", related_name="respondents",
         help_text="Respondent group attached to this BID")
     language = models.CharField(max_length=20,blank=True, null=True,
         help_text="Language of test")
@@ -197,7 +204,7 @@ class Respondent(Base):
         return self
         
     def __str__(self):
-        return self.nbr_respondent + '-' + self.type_respondent + '-' + self.city
+        return str(self.nbr_respondent) + ' - ' + self.type_respondent + ' - ' + self.city
     
 # Definition of a methodology (Mostly if multiple methodolies can be attached to 1 respondent group)
 class Methodology(Base):
@@ -209,7 +216,7 @@ class Methodology(Base):
         help_text="Start date")
     end_date = models.DateTimeField(blank=True, null=True,
         help_text="Start date")
-    respondent = models.ForeignKey("Respondent", related_name="methodology_respondent",
+    respondent = models.ForeignKey("Respondent", related_name="methodologies",
         help_text="Methodology linked to this respondent group")
         
     def create_from_dict(self, data, user, respondent, index):
@@ -239,7 +246,7 @@ class Deliverable(Base):
         help_text="Deliverable attached to this BID")
     notes = models.TextField(blank=True, null=True,
         help_text="Notes")
-    bid = models.ForeignKey("Bid", related_name="deliverable_bid",
+    bid = models.ForeignKey("Bid", related_name="deliverables",
         help_text="Deliverables linked to this BID")
 
     def create_from_dict(self, data, user, bid, key, x, name):

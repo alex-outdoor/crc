@@ -20,11 +20,22 @@ def create_client(request):
     if request.method == 'POST':
         data = request.POST
         
-        client = Client()
+        # Update existing client
+        client = Client.objects.filter(company_name=data.get('company_name', '')).first()
+        if not client:
+            # New client
+            client = Client()
         client.create_from_dict(data, request.user)
         client.save()
 
         return HttpResponseRedirect('/crc/list_clients')
+
+@login_required
+def edit_client(request, client_id):
+    if request.method == 'GET':
+        client = Client.objects.get(id=client_id)
+        data = client.as_dict()
+        return render(request, 'new_client_form.html', data)
 
 @login_required
 def create_bid(request):
@@ -82,3 +93,18 @@ def create_bid(request):
 def list_clients(request):
     if request.method == 'GET':
         return render(request, 'list_client.html', {})
+    
+@login_required
+def list_bids(request):
+    if request.method == 'GET':
+        return HttpResponse(200)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
