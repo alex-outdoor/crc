@@ -1,4 +1,9 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/authentification.css' %}">
+{% endblock %}
 
 {% block content %}
 <div ng-app="auth" ng-controller="Authentification">
