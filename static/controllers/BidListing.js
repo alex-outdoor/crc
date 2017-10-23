@@ -1,5 +1,5 @@
-app = angular.module("clientListing", ["ngCookies"]);
-app.controller("ClientListing", [
+app = angular.module("bidListing", ["ngCookies"]);
+app.controller("BidListing", [
   "$scope",
   "$http",
   "$cookies",
@@ -9,7 +9,7 @@ app.controller("ClientListing", [
     $scope.sortReverse = true;
 
     $scope.init = function() {
-      url = "http://" + location.host + "/api/clients/";
+      url = "http://" + location.host + "/api/bid/";
       
       $scope.base_url = "http://" + location.host;
       // API call
