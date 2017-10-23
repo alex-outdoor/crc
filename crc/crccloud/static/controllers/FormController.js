@@ -73,6 +73,7 @@ app.controller("FormController", [
               $scope.notes_deliverables = deliverables[0].notes;
             }
           });
+          get_clients();
       }
       
       else { // This is a new BID

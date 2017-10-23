@@ -24,24 +24,24 @@
         <td> <label class="control-label required">Topic</label></td> 
         <td> <input class="form-control" type="text" id="topic" name="topic" value="{{ topic }}" required> </td>
         <td> <label class="control-label">Moderator briefing-debriefing</label></td> 
-        <td> <div class="input-group"><input class="form-control" type="text" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td>
+        <td> <div class="input-group"><input class="form-control" type="number" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td>
     </tr>
     <tr>
       <td><label class="control-label required">Currency of quote</label></td>
       <td><input type="text" class="form-control" name="currency" value="{{ currency }}" required></td>
       <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> 
-      <td> <div class="input-group"><input class="form-control" type="text" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td>
+      <td> <div class="input-group"><input class="form-control" type="number" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td>
     </tr>
   <tr>
-      <td> <label class="control-label">Client (from database)</label></td> 
+      <td> <label class="control-label required">Client (from database)</label></td> 
       {% if client %}
-      <td><input type="text" class="form-control" name="client" value="{{ client.company_name }}"></td>
+      <td><input type="text" class="form-control" name="client" value="{{ client.company_name }}" disabled></td>
       {% else %}
       <td>
           {% verbatim %}
           <select name="client_id">
             <option ng-repeat="client in clients" value="{{client.id}}">
-              {{client.company_name }} - {{client.contact_name}}
+              {{client.company_name }}
             </option>
           </select>
           {% endverbatim %}
@@ -51,26 +51,26 @@
       <td></td>
   </tr>
   <tr>
-      <td> <label class="control-label">Company name</label></td> 
-      <td> <input class="form-control" type="text" name="company_name" value=""> </td>
+      <td> <label class="control-label required">Contact name</label></td> 
+      <td> <input class="form-control" type="text" name="contact_name" value="{{ contact_name }}" required> </td>
       <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="text" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+      <td><div class="input-group"><input class="form-control" type="number" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
-      <td> <label class="control-label">Contact name</label></td> 
-      <td> <input class="form-control" type="text" name="contact_name" value=""> </td>
+      <td> <label class="control-label required">Contact email</label></td> 
+      <td> <input class="form-control" type="email" name="contact_email" value="{{ contact_email }}" required> </td>
       <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="text" name="moderation_units" value="{{ moderation_units }}"></td>
+      <td><input class="form-control" type="number" name="moderation_units" value="{{ moderation_units }}"></td>
   </tr>
   <tr>
       <td> <label class="control-label required">Recruitment allowed time</label></td> 
       <td> <input class="form-control" type="text" name="recruitment_duration" value="{{ recruitment_duration }}" required> </td>
       <td> <label class="control-label">Simultaneous translation</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="text" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td>
+      <td> <div class="input-group"><input class="form-control" type="number" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
       <td> <label class="control-label required">Project management cost</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="text" name="project_management" value="{{ project_management }}" required> <span class="input-group-addon">$</span></div></td>
+      <td> <div class="input-group"><input class="form-control" type="number" name="project_management" value="{{ project_management }}" required> <span class="input-group-addon">$</span></div></td>
       <td> <label class="control-label">Translation : </label></td> 
       <td></td>
   </tr>
@@ -78,24 +78,24 @@
       <td> <label class="control-label">Incentive handling :</label></td>
       <td></td>
       <td class='right'><label class="control-label">Words estimation</label></td>
-      <td><input class="form-control" type="text" name="translation_words" id="translation_words" value="{{ translation_words }}"></td>
+      <td><input class="form-control" type="number" name="translation_words" id="translation_words" value="{{ translation_words }}"></td>
 
   </tr>
   <tr>
       <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="text" name="incentive_handling_unit_cost" value="{{ incentive_handling_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+      <td><div class="input-group"><input class="form-control" type="number" name="incentive_handling_unit_cost" value="{{ incentive_handling_unit_cost }}"><span class="input-group-addon">$</span></div></td>
       <td class='right'><label class="control-label">Total</label></td>
-        <td><div class="input-group"><input class="form-control" type="text" value="{{ translation_total }}" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
+        <td><div class="input-group"><input class="form-control" type="number" value="{{ translation_total }}" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
     <td class='right'><label class="control-label">Nbr of unit(s)</label></td>
-    <td><div class="input-group"><input class="form-control" type="text" name="incentive_handling_units" value="{{ incentive_handling_units }}"></div></td>
+    <td><div class="input-group"><input class="form-control" type="number" name="incentive_handling_units" value="{{ incentive_handling_units }}"></div></td>
     <td></td>
     <td></td>
   </tr>
   <tr>
       <td> <label class="control-label">Catering for client (estimation only)</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="text" name="catering_client" value="{{ catering_client }}"> <span class="input-group-addon">$</span></div></td>
+      <td> <div class="input-group"><input class="form-control" type="number" name="catering_client" value="{{ catering_client }}"> <span class="input-group-addon">$</span></div></td>
       <td> <label class="control-label">Facility rentals : </label></td> 
       <td></td>
   </tr>
@@ -107,15 +107,15 @@
   </tr>
   <tr>
       <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="text" name="refreshment_unit_cost" value="{{ refreshments_respondent_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+      <td><div class="input-group"><input class="form-control" type="number" name="refreshment_unit_cost" value="{{ refreshments_respondent_unit_cost }}"><span class="input-group-addon">$</span></div></td>
       <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="text" name="facility_unit_cost" value="{{ facility_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+      <td><div class="input-group"><input class="form-control" type="number" name="facility_unit_cost" value="{{ facility_unit_cost }}"><span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
       <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="text" name="refreshment_units" value="{{ refreshments_respondent_units }}"></td>
+      <td><input class="form-control" type="number" name="refreshment_units" value="{{ refreshments_respondent_units }}"></td>
       <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="text" name="facility_units" value="{{ facility_units }}"></td>
+      <td><input class="form-control" type="number" name="facility_units" value="{{ facility_units }}"></td>
   </tr>
   <tr>
       <td colspan = "4"> <textarea class="form-control" name="notes_bid" rows="5" placeholder="Notes about the BID">{{notes}}</textarea> </td>

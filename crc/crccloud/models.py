@@ -93,6 +93,10 @@ class Bid(Base):
         help_text="Potential name of the project")
     client = models.ForeignKey("Client", related_name="bid_client", blank=True, null=True,
         help_text="Client for this BID")
+    contact_name = models.CharField(max_length=100, blank=True, null=True,
+        help_text="Name of the contact if BID specific")
+    contact_email = models.EmailField('email address', max_length=254, blank=True, null=True, 
+        help_text="Email of the contact if BID specific")
     recruitment_duration = models.CharField(max_length=50, blank=True, null=True,
         help_text="Recruitment duration")
     currency = models.CharField(max_length=5, blank=True, null=True,
@@ -167,12 +171,16 @@ class Bid(Base):
         self.facility_duration = data.get('facility_duration', '')
         self.facility_rental_unit_cost = float(get_attribute_value(data,'facility_unit_cost'))
         self.notes = data.get('notes_bid', '')
+        self.contact_name = data.get('contact_name', '')
+        self.contact_email = data.get('contact_email', '')
         return self
     
     def as_dict(self):
         return {
             'topic': self.topic,
             'client': self.client,
+            'contact_name': self.contact_name,
+            'contact_email': self.contact_email,
             'currency': self.currency,
             'recruitment_duration': self.recruitment_duration,
             'project_management': self.project_mngt_cost,

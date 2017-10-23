@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td> <label class="control-label required">How many people (N) ?</label></td> 
-            <td> <input class="form-control" type="text" name="nbr_respondent_{{$index}}" id="nbr_respondent_{{$index}}" required></td>
+            <td> <input class="form-control" type="number" name="nbr_respondent_{{$index}}" id="nbr_respondent_{{$index}}" required></td>
             <td><input type="radio" name="radio_{{$index}}" value="taste_test" class="select"> </td>
             <td> <label class="control-label vertical">Taste Test</label> </td>
             <td><input class='hidden-for-bid' type="text" id="taste_test_duration"></td>
@@ -19,7 +19,7 @@
         </tr>
         <tr>
             <td> <label class="control-label">Over-recruitment ?</label></td> 
-            <td><input class="form-control" type="text" name="nbr_over_recruitment_{{$index}}" id="nbr_over_recruitment_{{$index}}" value=""></td>
+            <td><input class="form-control" type="number" name="nbr_over_recruitment_{{$index}}" id="nbr_over_recruitment_{{$index}}" value=""></td>
             <td><input type="radio" name="radio_{{$index}}" value="tdi" class="select"></td>
             <td> <label class="control-label">TDI</label> </td>
             <td><input class='hidden-for-bid' type="text" id="tdi_duration"></td>
@@ -46,7 +46,7 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Incentive</label> </td> 
-            <td> <div class="input-group"><input class="form-control" type="text" name="incentive_{{$index}}" id="incentive_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
+            <td> <div class="input-group"><input class="form-control" type="number" name="incentive_{{$index}}" id="incentive_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
             <td><input type="radio" name="radio_{{$index}}" value="web_tdi" class="select"></td>
             <td> <label class="control-label">Web-TDI</label> </td>
             <td><input class='hidden-for-bid' type="text" id="web_tdi_duration" style="visibility: hidden"></td>
@@ -64,7 +64,7 @@
         </tr>
         <tr>
             <td> <label class="control-label required">Recruitment cost</label> </td> 
-            <td> <div class="input-group"><input class="form-control" type="text" name="recruitment_cost_{{$index}}" id="recruitment_cost_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
+            <td> <div class="input-group"><input class="form-control" type="number" name="recruitment_cost_{{$index}}" id="recruitment_cost_{{$index}}" value="" required> <span class="input-group-addon">$</span></div></td>
             <td><input type="radio" name="radio_{{$index}}" value="online_focus_group" class="select"> </td>
             <td> <label class="control-label">Online Focus Group</label> </td>
             <td><input class='hidden-for-bid' type="text" id="online_focus_group_duration"></td>
