@@ -56,37 +56,42 @@ def create_bid(request, bid_id):
         else:
             # When editing
             bid = Bid.objects.get(id=bid_id)
-            edit_respondents = Respondent.objects.filter(bid__id=bid_id)
-            resp_ids = [x.id for x in edit_respondents]
-            edit_deliverables = Deliverable.objects.filter(bid__id=bid_id)
-            deliv_names = [x.name for x in edit_deliverables]
-            deliv_ids = [x.id for x in edit_deliverables]
             
+            # Delete Respondents group
+            #edit_respondents = Respondent.objects.filter(bid__id=bid_id)
+            #resp_ids = [x.id for x in edit_respondents]
+            Respondent.objects.filter(bid__id=bid_id).delete()
+            # Delete Deliverables
+            #edit_deliverables = Deliverable.objects.filter(bid__id=bid_id)
+            Deliverable.objects.filter(bid__id=bid_id).delete()
+            #deliv_names = [x.name for x in edit_deliverables]
+            #deliv_ids = [x.id for x in edit_deliverables]
+        print data
         bid.create_from_dict(data, request.user)
         bid.save()
         
-        if bid_id:
-            nbr_group = len(resp_ids)
-        else:
+        # if bid_id:
+        #     nbr_group = len(resp_ids)
+        # else:
             # Number of respondent group
-            nbr_group = int(data.get("saved_groups", '0'))
+        nbr_group = int(data.get("saved_groups", '0'))
             
         i = 0 
         while (i<nbr_group):
-            if not bid_id:
+            #if not bid_id:
                 # Create a respondent group
-                respondent = Respondent()
-            else:
-                respondent = Respondent.objects.get(id=nbr_group[i])
+            respondent = Respondent()
+            #else:
+                #respondent = Respondent.objects.get(id=nbr_group[i])
                 
             respondent.create_from_dict(data, request.user, bid, str(i))
             respondent.save()
             
-            if not bid_id:
+            #if not bid_id:
                 # Now it's one methodology per client but that might change
-                methodology = Methodology()
-            else:
-                methodology = Methodology.objects.get(respondent__id=nbr_group[i])
+            methodology = Methodology()
+            #else:
+                #methodology = Methodology.objects.get(respondent__id=nbr_group[i])
                 
             methodology.create_from_dict(data, request.user, respondent, str(i))
             methodology.save()
@@ -114,7 +119,7 @@ def create_bid(request, bid_id):
                 name = deliverables[key]
                 
             # Case (1) : Creating a BID
-            if not bid_id and qty != '':
+            if qty != '':
                 x = int(qty)
                 deliverable = Deliverable()
                 

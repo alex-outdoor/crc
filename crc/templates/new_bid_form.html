@@ -78,21 +78,14 @@
       <td> <label class="control-label">Incentive handling :</label></td>
       <td></td>
       <td class='right'><label class="control-label">Words estimation</label></td>
-      {% if translation_words %}
-        <td><input class="form-control" type="text" name="translation_words" value="{{ translation_words }}"></td>
-      {% else %}
-        <td><input class="form-control" type="text" name="translation_words" id="translation_words"></td>
-      {% endif %}
+      <td><input class="form-control" type="text" name="translation_words" id="translation_words" value="{{ translation_words }}"></td>
+
   </tr>
   <tr>
       <td class='right'><label class="control-label">Unit cost</label></td>
       <td><div class="input-group"><input class="form-control" type="text" name="incentive_handling_unit_cost" value="{{ incentive_handling_unit_cost }}"><span class="input-group-addon">$</span></div></td>
       <td class='right'><label class="control-label">Total</label></td>
-      {% if translation_total %}
-        <td><div class="input-group"><input class="form-control" type="text" value="{{ translation_total }}" disabled><span class="input-group-addon">$</span></div></td>
-      {% else %}
-        <td><div class="input-group"><input class="form-control" type="text" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
-      {% endif %}
+        <td><div class="input-group"><input class="form-control" type="text" value="{{ translation_total }}" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
     <td class='right'><label class="control-label">Nbr of unit(s)</label></td>
@@ -150,8 +143,8 @@
   <br>
   
   {% if bid_id %}
-  <!-- Editing button 
-    <a id="save" ng-click="updateBid()" class="btn btn-primary">Save changes</a> -->
+  <!-- Editing button -->
+    <button id="save" type="submit" class="btn btn-primary">Save changes</button>
   {% else %}
     <!-- Saving button -->
     <button id="save" type="submit" class="btn btn-primary">Create</button>
