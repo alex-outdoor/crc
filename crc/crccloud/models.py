@@ -172,6 +172,26 @@ class Bid(Base):
     def as_dict(self):
         return {
             'topic': self.topic,
+            'client': self.client,
+            'currency': self.currency,
+            'recruitment_duration': self.recruitment_duration,
+            'project_management': self.project_mngt_cost,
+            'incentive_handling_units': self.incentive_handling_qte,
+            'incentive_handling_unit_cost': self.incentive_handling_unit_cost,
+            'catering_client': self.catering_client,
+            'moderation_units': self.moderation_qte,
+            'moderation_unit_cost': self.moderation_unit_cost,
+            'moderator_travel': self.moderator_travel,
+            'moderator_briefing': self.moderator_briefing,
+            'simultaneous_translator': self.simultaneous_translation,
+            'translation_total': self.translation_cost,
+            'translation_words': self.translation_words,
+            'facility_units': self.facility_rental_qte,
+            'facility_duration': self.facility_duration,
+            'facility_unit_cost': self.facility_rental_unit_cost,
+            'refreshments_respondent_unit_cost': self.refreshments_respondent_unit_cost,
+            'refreshments_respondent_units': self.refreshments_respondent_qte,
+            'notes': self.notes
         }
 
 # Definition of a respondent group
@@ -260,6 +280,7 @@ class Deliverable(Base):
         self.quantity = x
         self.name = name
         self.bid = bid
+        self.duration = float(get_attribute_value(data, key+'_duration'))
         self.notes = data.get('notes_deliverable', '')
         
         return self        

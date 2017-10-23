@@ -19,12 +19,8 @@ def create_client(request):
 
     if request.method == 'POST':
         data = request.POST
-        
-        # Update existing client
-        client = Client.objects.filter(company_name=data.get('company_name', '')).first()
-        if not client:
-            # New client
-            client = Client()
+        # Creating a new client
+        client = Client()
         client.create_from_dict(data, request.user)
         client.save()
 
@@ -37,37 +33,80 @@ def edit_client(request, client_id):
         data = client.as_dict()
         return render(request, 'new_client_form.html', data)
     
+    if request.method == 'POST':
+        data = request.POST
+        client = Client.objects.get(id=client_id)
+        # Update existing client
+        client.create_from_dict(data)
+        client.save()
+        return HttpResponseRedirect('/crc/list_clients')
+            
+    
 @login_required
 def edit_bid(request, bid_id):
     if request.method == 'GET':
         bid = Bid.objects.get(id=bid_id)
         data = bid.as_dict()
         return render(request, 'new_bid_form.html', data)
+    
+    if request.method == 'POST':
+        bid = Bid.objects.get(id=bid_id)
+        data = bid.as_dict()
+        return render(request, 'new_bid_form.html', data)
 
 @login_required
-def create_bid(request):
+def create_bid(request, bid_id):
     if request.method == 'GET':
-        return render(request, 'new_bid_form.html')
-
+        data = {}
+        if bid_id:
+            # When editing a bid
+            bid = Bid.objects.get(id=bid_id)
+            data = bid.as_dict()
+            
+        data['bid_id'] = bid_id
+        return render(request, 'new_bid_form.html', data)
+    
     if request.method == 'POST':
         data = request.POST
-        
-        # Create/Save a new database Bid 
-        bid = Bid()
+
+        if not bid_id:
+            # Create a new database Bid
+            bid = Bid()
+        else:
+            # When editing
+            bid = Bid.objects.get(id=bid_id)
+            edit_respondents = Respondent.objects.filter(bid__id=bid_id)
+            resp_ids = [x.id for x in edit_respondents]
+            edit_deliverables = Deliverable.objects.filter(bid__id=bid_id)
+            deliv_names = [x.name for x in edit_deliverables]
+            deliv_ids = [x.id for x in edit_deliverables]
+            
         bid.create_from_dict(data, request.user)
         bid.save()
         
-        # Number of respondent group
-        nbr_group = int(data.get("saved_groups", '0'))
+        if bid_id:
+            nbr_group = len(resp_ids)
+        else:
+            # Number of respondent group
+            nbr_group = int(data.get("saved_groups", '0'))
+            
         i = 0 
         while (i<nbr_group):
-            # Create a respondent group
-            respondent = Respondent()
+            if not bid_id:
+                # Create a respondent group
+                respondent = Respondent()
+            else:
+                respondent = Respondent.objects.get(id=nbr_group[i])
+                
             respondent.create_from_dict(data, request.user, bid, str(i))
             respondent.save()
             
-            # Now it's one methodology per client but that might change
-            methodology = Methodology()
+            if not bid_id:
+                # Now it's one methodology per client but that might change
+                methodology = Methodology()
+            else:
+                methodology = Methodology.objects.get(respondent__id=nbr_group[i])
+                
             methodology.create_from_dict(data, request.user, respondent, str(i))
             methodology.save()
             
@@ -83,18 +122,41 @@ def create_bid(request):
             'summary_report':'Summary Report',
             'discussion_guide_design':'Discussion Guide Design',
             'screener_design':'Screener Design',
-            'other_test': data.get('other_test_name', '')
+            'other_deliverable': data.get('other_deliverable', '')
         }
         
         for key in deliverables.keys():
             qty = data.get(key + '_qty','')
-            if qty != '':
+            
+            name = key
+            if key == 'other_deliverable':
+                name = deliverables[key]
+                
+            # Case (1) : Creating a BID
+            if not bid_id and qty != '':
                 x = int(qty)
                 deliverable = Deliverable()
-                deliverable.create_from_dict(data, request.user, bid, key, x, deliverables[key])
+                
+                deliverable.create_from_dict(data, request.user, bid, key, x, name)
                 deliverable.save()
-            
-        return HttpResponse('BID saved')
+                    
+            # # Case (2) : Editing a BID
+            # if bid_id:
+            #     if key in deliv_names:
+            #         # Editing existing deliverables
+            #         index = deliv_names.index(key)
+            #         deliv_id = deliv_ids[index]
+            #         deliverable = Deliverable.objects.get(id=deliv_id)
+            #         print bid, key, x, name
+            #         deliverable.create_from_dict(data, request.user, bid, key, x, name)
+            #         #deliverable.save()
+            #     else:
+            #         # Could be new one or other_deliverable
+            #         deliverable = Deliverable()
+            #         deliverable.create_from_dict(data, request.user, bid, key, x, name)
+            #         #deliverable.save()
+            #         #TO DO: Deal with other deliverables 
+        return HttpResponseRedirect('/crc/list_bids')
 
 @login_required
 def list_clients(request):
