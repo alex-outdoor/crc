@@ -12,48 +12,29 @@ def index(request):
     return render(request, 'index.html')
 
 @login_required
-def create_client(request):
+def create_client(request, client_id):
     if request.method == 'GET':
-        data = {}
+        if client_id:
+            client = Client.objects.get(id=client_id)
+            data = client.as_dict()
+        else:
+            data = {}
+            
+        data['client_id'] = client_id
         return render(request, 'new_client_form.html', data)
 
     if request.method == 'POST':
         data = request.POST
-        # Creating a new client
-        client = Client()
+        if client_id:
+            client = Client.objects.get(id=client_id)
+        else:
+            # Creating a new client
+            client = Client()
         client.create_from_dict(data, request.user)
         client.save()
 
         return HttpResponseRedirect('/crc/list_clients')
-
-@login_required
-def edit_client(request, client_id):
-    if request.method == 'GET':
-        client = Client.objects.get(id=client_id)
-        data = client.as_dict()
-        return render(request, 'new_client_form.html', data)
     
-    if request.method == 'POST':
-        data = request.POST
-        client = Client.objects.get(id=client_id)
-        # Update existing client
-        client.create_from_dict(data)
-        client.save()
-        return HttpResponseRedirect('/crc/list_clients')
-            
-    
-@login_required
-def edit_bid(request, bid_id):
-    if request.method == 'GET':
-        bid = Bid.objects.get(id=bid_id)
-        data = bid.as_dict()
-        return render(request, 'new_bid_form.html', data)
-    
-    if request.method == 'POST':
-        bid = Bid.objects.get(id=bid_id)
-        data = bid.as_dict()
-        return render(request, 'new_bid_form.html', data)
-
 @login_required
 def create_bid(request, bid_id):
     if request.method == 'GET':

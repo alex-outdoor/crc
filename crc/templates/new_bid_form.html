@@ -6,7 +6,12 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="control-label"> BID Creation page </h2>
+{% if  bid_id %}
+  <h2 class="control-label"> BID editing page </h2>
+{% else %}
+  <h2 class="control-label"> BID creation page </h2>
+{% endif %}
+
 <div ng-app="form" ng-controller="FormController">
 <form action="/crc/new_bid/{{bid_id}}" method="post" ng-init="load()">
   {% csrf_token %}
