@@ -4,6 +4,7 @@ app.controller("FormController", [
   "$http",
   "$cookies",
   function($scope, $http, $cookies) {
+    
     $scope.load = function() {
       // Actions when loading the form
       
@@ -16,6 +17,9 @@ app.controller("FormController", [
         // API call
         var url = "http://" + location.host + "/api/bid/" + bid_id;
         $http.get(url).success(function(data, status, headers, config) {
+            // For Django procession view
+            $("#translation_total2").val(data["translation_cost"]);
+          
             var respondents = data.respondents;
             $scope.qte = [];
             for (var i=0; i<respondents.length; i++){
@@ -69,9 +73,10 @@ app.controller("FormController", [
               $scope.notes_deliverables = deliverables[0].notes;
             }
           });
+          get_clients();
       }
-      // This is a new BID
-      else {
+      
+      else { // This is a new BID
         // Creation a new BID
         $scope.qte = [];
         // By default, 5000 words

@@ -9,6 +9,7 @@ table {
   margin-left: 20px;
   border-collapse: separate;
   border-spacing: 5px 5px;
+  background-color: rgba(0, 150, 200, 0.5);
 }
 
 tr {
