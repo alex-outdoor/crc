@@ -42,7 +42,6 @@ def export_bid(request, bid_id):
         with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
             pdf = f.read()
         
-        
         r = HttpResponse(content_type='application/pdf')
         #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
         r.write(pdf)

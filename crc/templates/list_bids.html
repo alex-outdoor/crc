@@ -19,14 +19,20 @@
     <tr>
       <td></td>
       <td><label class="control-label">Topic</label></td>
+      <td><label class="control-label">Client</label></td>
+      <td><label class="control-label">Created date</label></td>
       <td><label class="control-label">Currency</label></td>
+      <td><label class="control-label">PDF export</label></td>
     </tr>
   </thead>
   <tbody>
     <tr ng-repeat="item in data_list | orderBy:sortType:sortReverse">
       <th scope="row">{{$index + 1}}</th>
       <td> <a href="{{ base_url }}/crc/new_bid/{{ item.id }}">{{ item.topic }}</a> </td>
+      <td> {{ item.client.company_name }} </td>
+      <td> {{ item.created_date|date:"M/d/y" }} </td>
       <td> {{ item.currency }} </td>
+      <td> <a href="{{ base_url }}/export/bid/{{ item.id }}">bid_{{ item.id }}.pdf</a> </td>
     </tr>
   </tbody>
   </table>
