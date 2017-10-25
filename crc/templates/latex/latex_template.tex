@@ -2,16 +2,18 @@
 {% load staticfiles %}
 \documentclass[12pt,english]{article}
 \usepackage{graphicx}
+\usepackage{hyperref}
 
 \usepackage[legalpaper, bindingoffset=0.2in, %
             left=1cm, right=1cm, top=1cm, bottom=1cm, %
             footskip=.25in]{geometry}
 
 \begin{document}
- %\begin{figure}[t]
+ \begin{figure}[t]
+    \href{ {{ logo }} }{\includegraphics{logo.jpg}}
      %\externalfigure[{{ logo }}][width=4cm]
      %\includegraphics[width=4cm]{/Users/athissen/Documents/crc/static/img/logo.jpg}
-  %\end{figure}
+  \end{figure}
   
   \begin{center}
     \Large{ {{topic}} }
