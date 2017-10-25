@@ -38,6 +38,7 @@ class RespondentSerializer(CustomSerializer):
 class BidSerializer(CustomSerializer):
     respondents = RespondentSerializer(many=True, read_only=True)
     deliverables = DeliverableSerializer(many=True, read_only=True)
+    client = ClientSerializer(many=False, read_only=True)
     
     class Meta:
         model = Bid

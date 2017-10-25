@@ -1,0 +1,10 @@
+{% autoescape on %}
+\documentclass{article}
+\begin{document}
+  \begin{tabular}{lll}
+   Topic & : & {{ topic }} \\
+   Client & : & {{ company }} \\
+   Nbr of respondents group & : & {{ nbr_groups }} \\
+  \end{tabular}
+\end{document}
+{% endautoescape %}

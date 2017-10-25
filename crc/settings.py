@@ -72,9 +72,10 @@ INSTALLED_APPS = [
     'crccloud',
     'authentification',
     'api',
+    'exporter',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

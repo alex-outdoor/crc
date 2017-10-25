@@ -27,5 +27,7 @@ urlpatterns = [
     url(r'^crc/', include('crccloud.urls')),
     url(r'^admin/', admin.site.urls),
     
+    url(r'^export/', include('exporter.urls')),
+    
     url(r'^api/', include('api.urls')),
 ]
