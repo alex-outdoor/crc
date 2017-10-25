@@ -10,11 +10,9 @@
 
 \begin{document}
  \begin{figure}[t]
- {% endautoescape %}
      \immediate\write18{ wget {{ logo }} }
      \includegraphics{logo.jpg}
-{% autoescape on %}
-     
+
      %\externalfigure[{{ logo }}][width=4cm]
      %\includegraphics[width=4cm]{/Users/athissen/Documents/crc/static/img/logo.jpg}
   \end{figure}
