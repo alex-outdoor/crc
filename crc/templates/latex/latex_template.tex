@@ -1,0 +1,54 @@
+{% autoescape on %}
+{% load staticfiles %}
+\documentclass[12pt,english]{article}
+\usepackage{graphicx}
+
+\usepackage[legalpaper, bindingoffset=0.2in, %
+            left=1cm, right=1cm, top=1cm, bottom=1cm, %
+            footskip=.25in]{geometry}
+
+\begin{document}
+  \begin{figure}[t]
+     \includegraphics[width=4cm]{/Users/athissen/Documents/crc/static/img/logo.jpg}
+  \end{figure}
+  
+  \begin{center}
+    \Large{ {{topic}} }
+  \end{center}
+    
+  
+
+  \begin{tabular}{l}
+    \textbf{Date :} {{creationDate}} \vspace*{0.2cm} \\
+  
+    \begin{tabular}{l}
+        {{ company }} \\
+        {{ contact_name }} \\
+        {{ contact_email }} \\
+    \end{tabular} \vspace*{2cm} \\
+
+    \textbf{Recruitment} \vspace*{0.5cm} \\
+    
+    \begin{tabular}{l|l|l|l}
+        Type of participant & Cost per participant & Number of participants & Total \\
+        \hline
+        {% for respondent in respondents %}
+            {{ respondent.type_respondent }} & {{ respondent.recruitment_cost }} & {{ respondent.nbr_respondent }} & {{ total }} \\
+        {% endfor %}
+    \end{tabular} \vspace*{1cm} \\
+
+    \textbf{Incentives} \vspace*{0.5cm} \\
+    
+    \begin{tabular}{l|l|l|l}
+        Duration/Type & Cost per participant & Number of participants & Total \\
+        \hline
+        {% for respondent in respondents %}
+            {{ respondent.methodologies.0.duration }}/{{ respondent.type_respondent }} & {{ respondent.incentive }} & {{ respondent.nbr_respondent }} & {{ total }} \\
+        {% endfor %}
+    \end{tabular} \vspace*{1cm} \\
+
+
+  \end{tabular}
+
+\end{document}
+{% endautoescape %}
