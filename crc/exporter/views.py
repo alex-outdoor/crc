@@ -37,7 +37,7 @@ def export_bid(request, bid_id):
         tempdir = tempfile.mkdtemp()
         
         for i in range(2):
-            process = Popen(['pdftex', '-output-directory', tempdir], stdin=PIPE, stdout=PIPE)
+            process = Popen(['pdflatex', '-output-directory', tempdir], stdin=PIPE, stdout=PIPE)
             process.communicate(rendered_tpl)
         
         with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
