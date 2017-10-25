@@ -35,7 +35,7 @@ def export_bid(request, bid_id):
             'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
             'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
             'respondents' : data['respondents'],
-            'logo' : crc_dir + '/static/img/logo.jpg',
+            'logo' : base_url + '/static/img/logo.jpg',
             'creationDate': 'Date of BID or of today ?',
         }
     
