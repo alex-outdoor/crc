@@ -7,15 +7,12 @@ from django.contrib.auth.decorators import login_required
 from django.template import Context
 from django.template.loader import get_template
 
-
 from subprocess import Popen, PIPE
 import tempfile
 import os
 import shutil 
 import requests
 import json
-
-from crccloud.models import Client, Bid, Respondent, Methodology, Deliverable
 
 @login_required
 def export_bid(request, bid_id):
@@ -28,7 +25,9 @@ def export_bid(request, bid_id):
         context = {  
             'topic': data['topic'],
             'company': data['client']['company_name'],
-            'nbr_groups' : len(data['respondents']),
+            'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
+            'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
+            'respondents' : data['respondents'],
         }
     
         template = get_template('latex_template.tex')
@@ -45,7 +44,10 @@ def export_bid(request, bid_id):
         
         shutil.rmtree(tempdir)
         r = HttpResponse(content_type='application/pdf')
-        r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
+        #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
         r.write(pdf)
         return r
+    
+    else:
+        return HttpResponse(404)
     

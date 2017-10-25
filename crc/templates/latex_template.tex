@@ -1,10 +1,31 @@
 {% autoescape on %}
 \documentclass{article}
 \begin{document}
+
+
+\begin{tabular}{l}
+
+  \textbf{BID infos :} \vspace*{0.2cm} \\
+  
   \begin{tabular}{lll}
-   Topic & : & {{ topic }} \\
-   Client & : & {{ company }} \\
-   Nbr of respondents group & : & {{ nbr_groups }} \\
+      Topic & : & {{ topic }} \\
+      Client & : & {{ company }} \\
+      Contact name & : & {{ contact_name }} \\
+      Contact email & : & {{ contact_email }} \\
+  \end{tabular} \vspace*{0.5cm} \\
+
+  
+  \textbf{Respondents infos :} \vspace*{0.2cm} \\
+  
+  \begin{tabular}{lllll}
+      Type of respondents & Quantity & Incentive & Recruitment cost & city \\
+      \hline
+      {% for respondent in respondents %}
+          {{ respondent.type_respondent }} & {{ respondent.nbr_respondent }} & {{ respondent.incentive }} & {{ respondent.recruitment_cost }} & {{ respondent.city }} \\
+      {% endfor %}
   \end{tabular}
+
+\end{tabular}
+
 \end{document}
 {% endautoescape %}
