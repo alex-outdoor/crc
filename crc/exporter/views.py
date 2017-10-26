@@ -27,6 +27,16 @@ def export_bid(request, bid_id):
 
     response = requests.get(url)
     if(response.ok):
+        
+        # Download image from /static/
+        logo_url = base_url + '/static/img/logo.jpg'
+        logo_response = requests.get(url)
+        if logo_response.ok:
+            logo_tempdir = tempfile.mkdtemp()
+            with open(os.path.join(logo_tempdir, 'logo.jpg'), 'wb') as f:
+                f.write(logo_response.content)
+                
+                
         data = json.loads(response.content)
         
         context = {  
@@ -35,7 +45,7 @@ def export_bid(request, bid_id):
             'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
             'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
             'respondents' : data['respondents'],
-            'logo' : base_url + '/static/img/logo.jpg',
+            'logo' : os.path.join(logo_tempdir, 'logo.jpg'),
             'creationDate': 'Date of BID or of today ?',
         }
     
