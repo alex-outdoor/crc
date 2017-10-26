@@ -17,10 +17,9 @@ import requests
 import json
 import PIL
 
-from pylatex import Document, PageStyle, Head, Foot, MiniPage, \
-    StandAloneGraphic, MultiColumn, Tabu, LongTabu, LargeText, MediumText, \
-    LineBreak, NewPage, Tabularx, TextColor, simple_page_number
-from pylatex.utils import bold, NoEscape
+from pylatex import Document, MiniPage, TextBlock, MediumText, HugeText, \
+    SmallText, VerticalSpace, HorizontalSpace
+from pylatex.utils import bold
 
 
 @login_required
