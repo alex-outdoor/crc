@@ -14,6 +14,7 @@ import os
 import shutil 
 import requests
 import json
+import PIL
 
 @login_required
 def export_bid(request, bid_id):
