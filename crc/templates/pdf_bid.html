@@ -1,0 +1,59 @@
+{% load staticfiles %}
+
+{% block styles %}
+    <style type="text/css">
+        #content {
+            font-family: "Helvetica", "sans-serif";
+            color: #333333;
+        }
+        #logo {
+          width: 200px;
+        }
+        #title {
+          text-align: center;
+          font-size: 200%;
+        }
+        
+        table {
+          margin-top: 50px;
+        }
+        
+        #client {
+          width: 200px;
+        }
+
+        
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="content">
+
+      <img id="logo" src="{% static '/img/logo.jpg' %}"/>
+      <center id="title"> {{topic}} </center>
+      
+      <table id="client">
+        <tr>
+          <td> Company </td> <td> {{ company }} </td>
+        </tr>
+        <tr>
+          <td> Contact name </td> <td> {{ contact_name }} </td>
+        </tr>
+        <tr>
+          <td> Contact email </td> <td> {{ contact_email }} </td>
+        </tr>
+      </table>
+      
+      <table id="respondents">
+        <tr>
+          <td> Type of participant </td> <td> Cost per participant </td> <td> Number of participant </td> <td> Total </td>
+        </tr>
+        {% for respondent in respondents %}
+          <tr>
+            <td> {{ respondent.type_respondent }} </td> <td> {{ respondent.recruitment_cost }} </td> <td> {{ respondent.nbr_respondent }} </td> <td> total </td>
+          </tr>
+        {% endfor %}
+      </table>
+      
+    </div>
+{% endblock %}

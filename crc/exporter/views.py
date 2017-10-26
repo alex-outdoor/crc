@@ -17,36 +17,29 @@ import requests
 import json
 import PIL
 
+from django.conf import settings
+from easy_pdf.views import PDFTemplateView
+from easy_pdf.rendering import render_to_pdf_response
+
+@login_required
+def pdf_bid(request):
+    template = 'pdf_bid.html'
+    context = {'topic': 'Bid of the day'}
+    
+    pdf = render_to_pdf_response(request, template, context, using=None, 
+        download_filename=None, content_type='application/pdf', 
+        response_class=HttpResponse)
+    return pdf
 
 @login_required
 def export_bid(request, bid_id):
-    
+
     # Database informations
     base_url = request.scheme + '://' + request.META['HTTP_HOST']
     url =  base_url + '/api/bid/' + bid_id
-    
-    # LaTeX images seems to need absolute file path
-    absolute_path = os.path.abspath(os.path.dirname(__file__))
-    crc_dir = '/'.join(absolute_path.split('/')[0:-2])
 
     response = requests.get(url)
-    if(response.ok):
-        # Download image from /static/
-        logo_url = base_url + '/static/img/logo.jpg'
-        # logo_response = requests.get(url)
-        # if logo_response.ok:
-        #     logo_tempdir = tempfile.mkdtemp()
-        #     with open(os.path.join(logo_tempdir, 'logo.jpg'), 'wb') as f:
-        #         f.write(logo_response.content)
-
-        #r = requests.get(logo_url, stream=True)
-        #r.raise_for_status()
-        #r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
-        #with open('/var/logo.jpg', 'wb') as f:
-        #    r.raw.decode_content = True
-        #    shutil.copyfileobj(r.raw, f)
-        #r.close()  # Safety when stream=True ensure the connection is released.
-                
+    if(response.ok):    
         data = json.loads(response.content)
         
         context = {  
@@ -55,30 +48,13 @@ def export_bid(request, bid_id):
             'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
             'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
             'respondents' : data['respondents'],
-            'logo' : '/var/logo.jpg',
             'creationDate': 'Date of BID or of today ?',
         }
     
-        template = get_template('latex/latex_template.tex')
-        rendered_tpl = template.render(context).encode('utf-8')
-        
-        #subprocess.call(['pdflatex', rendered_tpl])
-        
-        tempdir = tempfile.mkdtemp()
-        
-        for i in range(2):
-            process = Popen(['pdflatex', '-output-directory', tempdir, '--shell-escape'], stdin=PIPE)
-            process.communicate(rendered_tpl)
-        
-        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
-            pdf = f.read()
-        
-        r = HttpResponse(content_type='application/pdf')
-        #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
-        r.write(pdf)
-        shutil.rmtree(tempdir)
-        return r
-    
-    else:
-        return HttpResponse(404)
-    
+        template = 'pdf_bid.html'
+
+        pdf = render_to_pdf_response(request, template, context, using=None, 
+            download_filename=None, content_type='application/pdf', 
+            response_class=HttpResponse)
+            
+        return pdf
