@@ -77,7 +77,7 @@ def export_bid(request, bid_id):
         #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
         r.write(pdf)
         shutil.rmtree(tempdir)
-        
+        return r
     
     else:
         return HttpResponse(404)
