@@ -40,7 +40,7 @@ def export_bid(request, bid_id):
         r = requests.get(logo_url, stream=True)
         #r.raise_for_status()
         #r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
-        with with open('/var/img/logo.jpg'), 'wb') as f:
+        with open('/var/img/logo.jpg'), 'wb') as f:
             r.raw.decode_content = True
             shutil.copyfileobj(r.raw, f)
         r.close()  # Safety when stream=True ensure the connection is released.
