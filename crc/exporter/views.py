@@ -136,7 +136,7 @@ def export_bid(request, bid_id):
             #     for i in range(0, 20):
             #         cheque_table.add_row([cheque, cheque])
 
-            doc.generate_pdf("complex_report", clean_tex=False)
+            doc.generate_pdf("/var/crc_project/crc/templates/latex/complex_report", clean_tex=False)
 
         generate_unique()
         return HttpResponse(200)
