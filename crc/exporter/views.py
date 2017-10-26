@@ -52,7 +52,7 @@ def export_bid(request, bid_id):
             'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
             'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
             'respondents' : data['respondents'],
-            'logo' : os.path.join(logo_tempdir, 'logo.jpg'),
+            #'logo' : os.path.join(logo_tempdir, 'logo.jpg'),
             'creationDate': 'Date of BID or of today ?',
         }
     
