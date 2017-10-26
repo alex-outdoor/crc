@@ -23,14 +23,14 @@
     <tr>
         <td> <label class="control-label required">Topic</label></td> 
         <td> <input class="form-control" type="text" id="topic" name="topic" value="{{ topic }}" required> </td>
-        <td> <label class="control-label">Moderator briefing-debriefing</label></td> 
-        <td> <div class="input-group"><input class="form-control" type="number" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td>
+        <!-- <td> <label class="control-label">Moderator briefing-debriefing</label></td> 
+        <td> <div class="input-group"><input class="form-control" type="number" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td> -->
     </tr>
     <tr>
       <td><label class="control-label required">Currency of quote</label></td>
       <td><input type="text" class="form-control" name="currency" value="{{ currency }}" required></td>
-      <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td>
+      <!-- <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> 
+      <td> <div class="input-group"><input class="form-control" type="number" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td> -->
     </tr>
   <tr>
       <td> <label class="control-label required">Client (from database)</label></td> 
@@ -47,28 +47,28 @@
           {% endverbatim %}
       </td>
       {% endif %}
-      <td> <label class="control-label">Moderation : </label></td> 
-      <td></td>
+      <!-- <td> <label class="control-label">Moderation : </label></td> 
+      <td></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Contact name</label></td> 
       <td> <input class="form-control" type="text" name="contact_name" value="{{ contact_name }}" required> </td>
-      <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="number" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+      <!-- <td class='right'><label class="control-label">Unit cost</label></td>
+      <td><div class="input-group"><input class="form-control" type="number" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Contact email</label></td> 
       <td> <input class="form-control" type="email" name="contact_email" value="{{ contact_email }}" required> </td>
-      <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="number" name="moderation_units" value="{{ moderation_units }}"></td>
+      <!-- <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
+      <td><input class="form-control" type="number" name="moderation_units" value="{{ moderation_units }}"></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Recruitment allowed time</label></td> 
       <td> <input class="form-control" type="text" name="recruitment_duration" value="{{ recruitment_duration }}" required> </td>
-      <td> <label class="control-label">Simultaneous translation</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td>
+      <!-- <td> <label class="control-label">Simultaneous translation</label></td> 
+      <td> <div class="input-group"><input class="form-control" type="number" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td> -->
   </tr>
-  <tr>
+  <!-- <tr>
       <td> <label class="control-label required">Project management cost</label></td> 
       <td> <div class="input-group"><input class="form-control" type="number" name="project_management" value="{{ project_management }}" required> <span class="input-group-addon">$</span></div></td>
       <td> <label class="control-label">Translation : </label></td> 
@@ -119,13 +119,14 @@
   </tr>
   <tr>
       <td colspan = "4"> <textarea class="form-control" name="notes_bid" rows="5" placeholder="Notes about the BID">{{notes}}</textarea> </td>
-  </tr>
+  </tr> -->
 </table>
 
   <!-- When editing - respondent infos are fetched throught the API -->
-  <!-- Respondents form -->
-  <button id="respondent_button_add" type="button" ng-click="add_respondent()" class="btn btn-secondary bid_button">Add respondent group(s)</button>
-  <button id="respondent_button_remove" type="button" ng-click="remove_respondent()" class="btn btn-secondary bid_button">Remove last respondent group</button>
+  
+  <!-- RECRUITMENT -->
+  <button id="respondent_button_add" type="button" ng-click="add_respondent()" class="btn btn-secondary bid_button">Add recruitment form</button>
+  <button id="respondent_button_remove" type="button" ng-click="remove_respondent()" class="btn btn-secondary bid_button">Remove last recruitment form (data will be lost)</button>
   <div ng-repeat="i in qte">
     
     {% verbatim %}
@@ -136,9 +137,18 @@
     {% include "new_respondent.html" %}
   </div>
   <br>
+  <!-- FACILITY RENTALS -->
+  <button id="facility_button" type="button" ng-click="show_facility()" class="btn btn-secondary bid_button">Facility rentals</button>
+    {% include "facility_rentals.html" %}
+  <br>
   
-  <!-- Deliverables table -->
-  <button id="deliverable_button" type="button" ng-click="show_deliverables()" class="btn btn-secondary bid_button">Show deliverables</button>
+  <!-- MODERATION -->
+  <button id="moderation_button" type="button" ng-click="show_moderation()" class="btn btn-secondary bid_button">Moderation</button>
+    {% include "moderation.html" %}
+  <br>
+  
+  <!-- DELIVERABLES -->
+  <button id="deliverable_button" type="button" ng-click="show_deliverables()" class="btn btn-secondary bid_button">Deliverables</button>
     {% include "deliverables.html" %}
   <br>
   
@@ -147,7 +157,7 @@
     <button id="save" type="submit" class="btn btn-primary">Save changes</button>
   {% else %}
     <!-- Saving button -->
-    <button id="save" type="submit" class="btn btn-primary">Create</button>
+    <button id="save" type="submit" class="btn btn-primary">Save</button>
   {% endif %}
 </form>
 </div>

@@ -1,0 +1,17 @@
+<table id="moderation_table" ng-show="show_mod" class="text-white">
+  <tr>
+    <td> <label class="control-label">Moderator briefing-debriefing</label></td><td> <div class="input-group"><input class="form-control" type="number" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td>
+  </tr>
+  <tr>
+    <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> <td> <div class="input-group"><input class="form-control" type="number" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td>
+  </tr>
+  <tr>
+    <td> <label class="control-label">Moderation : </label></td><td></td>
+  </tr>
+  <tr>
+    <td class='right'><label class="control-label">Unit cost</label></td><td><div class="input-group"><input class="form-control" type="number" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+  </tr>
+  <tr>
+    <td class='right'><label class="control-label">Nbr of unit(s)</label></td><td><input class="form-control" type="number" name="moderation_units" value="{{ moderation_units }}"></td>
+  </tr>
+</table>
