@@ -17,9 +17,8 @@ import requests
 import json
 import PIL
 
-from pylatex import Document, MiniPage, TextBlock, MediumText, HugeText, \
-    SmallText, VerticalSpace, HorizontalSpace
-from pylatex.utils import bold
+from pylatex import Document, Section, Figure, SubFigure, NoEscape
+import os
 
 
 @login_required
@@ -27,35 +26,28 @@ def export_bid(request, bid_id):
     
     if not bid_id:
         # test of PyLatex
-        geometry_options = {"margin": "0.5in"}
-        doc = Document(indent=False, geometry_options=geometry_options)
-        doc.change_length("\TPHorizModule", "1mm")
-        doc.change_length("\TPVertModule", "1mm")
+        doc = Document(default_filepath='subfigures')
+        image_filename = os.path.join(os.path.dirname(__file__), 'logo.jpg')
 
-        with doc.create(MiniPage(width=r"\textwidth")) as page:
-            with page.create(TextBlock(100, 0, 0)):
-                page.append("**** Ten Thousand Dollars")
+        with doc.create(Section('Showing subfigures')):
+            with doc.create(Figure(position='h!')) as kittens:
+                with doc.create(SubFigure(
+                        position='b',
+                        width=NoEscape(r'0.45\linewidth'))) as left_kitten:
 
-            with page.create(TextBlock(100, 0, 30)):
-                page.append("COMPANY NAME")
-                page.append("\nSTREET, ADDRESS")
-                page.append("\nCITY, POSTAL CODE")
+                    left_kitten.add_image(image_filename,
+                                          width=NoEscape(r'\linewidth'))
+                    left_kitten.add_caption('Kitten on the left')
+                with doc.create(SubFigure(
+                        position='b',
+                        width=NoEscape(r'0.45\linewidth'))) as right_kitten:
 
-            with page.create(TextBlock(100, 150, 40)):
-                page.append(HugeText(bold("VOID")))
+                    right_kitten.add_image(image_filename,
+                                           width=NoEscape(r'\linewidth'))
+                    right_kitten.add_caption('Kitten on the right')
+                kittens.add_caption("Two kittens")
 
-            with page.create(TextBlock(80, 150, 0)):
-                page.append("DATE")
-                page.append(MediumText(bold("2016 06 07\n")))
-                page.append(HorizontalSpace("10mm"))
-                page.append(SmallText("Y/A M/M D/J"))
-
-            with page.create(TextBlock(70, 150, 30)):
-                page.append(MediumText(bold("$***** 10,000.00")))
-
-            page.append(VerticalSpace("100mm"))
-
-        doc.generate_pdf("/var/crc_project/crc/templates/latex/textblock", clean_tex=False)
+        doc.generate_pdf("/var/crc_project/crc/templates/latex/crc", clean_tex=False)
 
         return HttpResponse(200)
     
