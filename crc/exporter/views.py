@@ -28,117 +28,36 @@ def export_bid(request, bid_id):
     
     if not bid_id:
         # test of PyLatex
-        def generate_unique():
-            geometry_options = {
-                "head": "40pt",
-                "margin": "0.5in",
-                "bottom": "0.6in",
-                "includeheadfoot": True
-            }
-            doc = Document(geometry_options=geometry_options)
+        geometry_options = {"margin": "0.5in"}
+        doc = Document(indent=False, geometry_options=geometry_options)
+        doc.change_length("\TPHorizModule", "1mm")
+        doc.change_length("\TPVertModule", "1mm")
 
-            # Generating first page style
-            first_page = PageStyle("firstpage")
+        with doc.create(MiniPage(width=r"\textwidth")) as page:
+            with page.create(TextBlock(100, 0, 0)):
+                page.append("**** Ten Thousand Dollars")
 
-            # Add document title
-            with first_page.create(Head("R")) as right_header:
-                with right_header.create(MiniPage(width=NoEscape(r"0.49\textwidth"),
-                                         pos='c', align='r')) as title_wrapper:
-                    title_wrapper.append(LargeText(bold("Bank Account Statement")))
-                    title_wrapper.append(LineBreak())
-                    title_wrapper.append(MediumText(bold("Date")))
+            with page.create(TextBlock(100, 0, 30)):
+                page.append("COMPANY NAME")
+                page.append("\nSTREET, ADDRESS")
+                page.append("\nCITY, POSTAL CODE")
 
-            # Add footer
-            with first_page.create(Foot("C")) as footer:
-                message = "Important message please read"
-                with footer.create(Tabularx(
-                        "X X X X",
-                        width_argument=NoEscape(r"\textwidth"))) as footer_table:
+            with page.create(TextBlock(100, 150, 40)):
+                page.append(HugeText(bold("VOID")))
 
-                    footer_table.add_row(
-                        [MultiColumn(4, align='l', data=TextColor("blue", message))])
-                    footer_table.add_hline(color="blue")
-                    footer_table.add_empty_row()
+            with page.create(TextBlock(80, 150, 0)):
+                page.append("DATE")
+                page.append(MediumText(bold("2016 06 07\n")))
+                page.append(HorizontalSpace("10mm"))
+                page.append(SmallText("Y/A M/M D/J"))
 
-                    branch_address = MiniPage(
-                        width=NoEscape(r"0.25\textwidth"),
-                        pos='t')
-                    branch_address.append("960 - 22nd street east")
-                    branch_address.append("\n")
-                    branch_address.append("Saskatoon, SK")
+            with page.create(TextBlock(70, 150, 30)):
+                page.append(MediumText(bold("$***** 10,000.00")))
 
-                    document_details = MiniPage(width=NoEscape(r"0.25\textwidth"),
-                                                pos='t', align='r')
-                    document_details.append("1000")
-                    document_details.append(LineBreak())
-                    document_details.append(simple_page_number())
+            page.append(VerticalSpace("100mm"))
 
-                    footer_table.add_row([branch_address, branch_address,
-                                          branch_address, document_details])
+        doc.generate_pdf("/var/crc_project/crc/templates/latex/textblock", clean_tex=False)
 
-            doc.preamble.append(first_page)
-            # End first page style
-
-            # Add customer information
-            with doc.create(Tabu("X[l] X[r]")) as first_page_table:
-                customer = MiniPage(width=NoEscape(r"0.49\textwidth"), pos='h')
-                customer.append("Verna Volcano")
-                customer.append("\n")
-                customer.append("For some Person")
-                customer.append("\n")
-                customer.append("Address1")
-                customer.append("\n")
-                customer.append("Address2")
-                customer.append("\n")
-                customer.append("Address3")
-
-                # Add branch information
-                branch = MiniPage(width=NoEscape(r"0.49\textwidth"), pos='t!',
-                                  align='r')
-                branch.append("Branch no.")
-                branch.append(LineBreak())
-                branch.append(bold("1181..."))
-                branch.append(LineBreak())
-                branch.append(bold("TIB Cheque"))
-
-                first_page_table.add_row([customer, branch])
-                first_page_table.add_empty_row()
-
-            doc.change_document_style("firstpage")
-            doc.add_color(name="lightgray", model="gray", description="0.80")
-
-            # Add statement table
-            with doc.create(LongTabu("X[l] X[2l] X[r] X[r] X[r]",
-                                     row_height=1.5)) as data_table:
-                data_table.add_row(["date",
-                                    "description",
-                                    "debits($)",
-                                    "credits($)",
-                                    "balance($)"],
-                                   mapper=bold,
-                                   color="lightgray")
-                data_table.add_empty_row()
-                data_table.add_hline()
-                row = ["2016-JUN-01", "Test", "$100", "$1000", "-$900"]
-                for i in range(30):
-                    if (i % 2) == 0:
-                        data_table.add_row(row, color="lightgray")
-                    else:
-                        data_table.add_row(row)
-
-            doc.append(NewPage())
-
-            # Add cheque images
-            # with doc.create(LongTabu("X[c] X[c]")) as cheque_table:
-            #     cheque_file = os.path.join(os.path.dirname(__file__),
-            #                                'chequeexample.png')
-            #     cheque = StandAloneGraphic(cheque_file, image_options="width=200px")
-            #     for i in range(0, 20):
-            #         cheque_table.add_row([cheque, cheque])
-
-            doc.generate_pdf("/var/crc_project/crc/templates/latex/complex_report", clean_tex=False)
-
-        generate_unique()
         return HttpResponse(200)
     
     # Database informations
