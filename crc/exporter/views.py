@@ -37,13 +37,13 @@ def export_bid(request, bid_id):
         #     with open(os.path.join(logo_tempdir, 'logo.jpg'), 'wb') as f:
         #         f.write(logo_response.content)
 
-        r = requests.get(logo_url, stream=True)
+        #r = requests.get(logo_url, stream=True)
         #r.raise_for_status()
         #r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
-        with open('/var/logo.jpg', 'wb') as f:
-            r.raw.decode_content = True
-            shutil.copyfileobj(r.raw, f)
-        r.close()  # Safety when stream=True ensure the connection is released.
+        #with open('/var/logo.jpg', 'wb') as f:
+        #    r.raw.decode_content = True
+        #    shutil.copyfileobj(r.raw, f)
+        #r.close()  # Safety when stream=True ensure the connection is released.
                 
         data = json.loads(response.content)
         
@@ -53,7 +53,7 @@ def export_bid(request, bid_id):
             'contact_name': data['contact_name'] if data['contact_name'] else data['client']['contact_name'],
             'contact_email': data['contact_email'] if data['contact_name'] else data['client']['contact_email'],
             'respondents' : data['respondents'],
-            #'logo' : os.path.join(logo_tempdir, 'logo.jpg'),
+            'logo' : '/var/logo.jpg',
             'creationDate': 'Date of BID or of today ?',
         }
     
