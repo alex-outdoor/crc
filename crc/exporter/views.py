@@ -30,12 +30,18 @@ def export_bid(request, bid_id):
         
         # Download image from /static/
         logo_url = base_url + '/static/img/logo.jpg'
-        logo_response = requests.get(url)
-        if logo_response.ok:
-            logo_tempdir = tempfile.mkdtemp()
-            with open(os.path.join(logo_tempdir, 'logo.jpg'), 'wb') as f:
-                f.write(logo_response.content)
-                
+        # logo_response = requests.get(url)
+        # if logo_response.ok:
+        #     logo_tempdir = tempfile.mkdtemp()
+        #     with open(os.path.join(logo_tempdir, 'logo.jpg'), 'wb') as f:
+        #         f.write(logo_response.content)
+
+        r = requests.get(logo_url, stream=True)
+        r.raise_for_status()
+        r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
+        with PIL.Image.open(r.raw) as img:
+            img.show()
+        r.close()  # Safety when stream=True ensure the connection is released.
                 
         data = json.loads(response.content)
         
