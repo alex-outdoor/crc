@@ -38,10 +38,11 @@ def export_bid(request, bid_id):
         #         f.write(logo_response.content)
 
         r = requests.get(logo_url, stream=True)
-        r.raise_for_status()
-        r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
-        with PIL.Image.open(r.raw) as img:
-            img.show()
+        #r.raise_for_status()
+        #r.raw.decode_content = True  # Required to decompress gzip/deflate compressed responses.
+        with with open('/var/img/logo.jpg'), 'wb') as f:
+            r.raw.decode_content = True
+            shutil.copyfileobj(r.raw, f)
         r.close()  # Safety when stream=True ensure the connection is released.
                 
         data = json.loads(response.content)
