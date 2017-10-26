@@ -8,7 +8,8 @@ from django.template import Context
 from django.template.loader import get_template
 from django.utils.formats import date_format
 
-from subprocess import Popen, PIPE
+#from subprocess import Popen, PIPE
+import subprocess
 import tempfile
 import os
 import shutil 
@@ -59,21 +60,23 @@ def export_bid(request, bid_id):
     
         template = get_template('latex/latex_template.tex')
         rendered_tpl = template.render(context).encode('utf-8')
-    
-        tempdir = tempfile.mkdtemp()
         
-        for i in range(2):
-            process = Popen(['pdflatex', '-output-directory', tempdir, '--shell-escape', '--enable-write18'], stdin=PIPE, stdout=None)
-            process.communicate(rendered_tpl)
+        subprocess.call(['pdflatex', rendered_tpl])
         
-        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
-            pdf = f.read()
+        #tempdir = tempfile.mkdtemp()
         
-        r = HttpResponse(content_type='application/pdf')
+        #for i in range(2):
+        #    process = Popen(['pdflatex', '-output-directory', tempdir, '--shell-escape', '--enable-write18'], stdin=PIPE, stdout=None)
+        #    process.communicate(rendered_tpl)
+        
+        #with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
+        #    pdf = f.read()
+        
+        #r = HttpResponse(content_type='application/pdf')
         #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
-        r.write(pdf)
-        shutil.rmtree(tempdir)
-        return r
+        #r.write(pdf)
+        #shutil.rmtree(tempdir)
+        return HttpResponse(200)
     
     else:
         return HttpResponse(404)

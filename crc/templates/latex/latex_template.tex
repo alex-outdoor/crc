@@ -18,7 +18,42 @@
      %\includegraphics[width=4cm]{/val/crc_project/static/img/logo.jpg}
   \end{figure}
   
+  \begin{center}
+    \Large{ {{topic}} }
+  \end{center}
+  
+  {{ logo }}
+  \begin{tabular}{l}
+    \textbf{Date :} {{creationDate}} \vspace*{0.2cm} \\
+  
+    \begin{tabular}{l}
+        {{ company }} \\
+        {{ contact_name }} \\
+        {{ contact_email }} \\
+    \end{tabular} \vspace*{2cm} \\
 
+    \textbf{Recruitment} \vspace*{0.5cm} \\
+    
+    \begin{tabular}{l|l|l|l}
+        Type of participant & Cost per participant & Number of participants & Total \\
+        \hline
+        {% for respondent in respondents %}
+            {{ respondent.type_respondent }} & {{ respondent.recruitment_cost }} & {{ respondent.nbr_respondent }} & {{ total }} \\
+        {% endfor %}
+    \end{tabular} \vspace*{1cm} \\
+
+    \textbf{Incentives} \vspace*{0.5cm} \\
+    
+    \begin{tabular}{l|l|l|l}
+        Duration/Type & Cost per participant & Number of participants & Total \\
+        \hline
+        {% for respondent in respondents %}
+            {{ respondent.methodologies.0.duration }}/{{ respondent.type_respondent }} & {{ respondent.incentive }} & {{ respondent.nbr_respondent }} & {{ total }} \\
+        {% endfor %}
+    \end{tabular} \vspace*{1cm} \\
+
+
+  \end{tabular}
 
 \end{document}
 {% endautoescape %}
