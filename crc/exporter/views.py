@@ -17,39 +17,9 @@ import requests
 import json
 import PIL
 
-from pylatex import Document, Section, Figure, SubFigure, NoEscape
-import os
-
 
 @login_required
 def export_bid(request, bid_id):
-    
-    if not bid_id:
-        # test of PyLatex
-        doc = Document(default_filepath='subfigures')
-        image_filename = os.path.join(os.path.dirname(__file__), 'logo.jpg')
-
-        with doc.create(Section('Showing subfigures')):
-            with doc.create(Figure(position='h!')) as kittens:
-                with doc.create(SubFigure(
-                        position='b',
-                        width=NoEscape(r'0.45\linewidth'))) as left_kitten:
-
-                    left_kitten.add_image(image_filename,
-                                          width=NoEscape(r'\linewidth'))
-                    left_kitten.add_caption('Kitten on the left')
-                with doc.create(SubFigure(
-                        position='b',
-                        width=NoEscape(r'0.45\linewidth'))) as right_kitten:
-
-                    right_kitten.add_image(image_filename,
-                                           width=NoEscape(r'\linewidth'))
-                    right_kitten.add_caption('Kitten on the right')
-                kittens.add_caption("Two kittens")
-
-        doc.generate_pdf("/var/crc_project/crc/templates/latex/crc", clean_tex=False)
-
-        return HttpResponse(200)
     
     # Database informations
     base_url = request.scheme + '://' + request.META['HTTP_HOST']
@@ -61,7 +31,6 @@ def export_bid(request, bid_id):
 
     response = requests.get(url)
     if(response.ok):
-        
         # Download image from /static/
         logo_url = base_url + '/static/img/logo.jpg'
         # logo_response = requests.get(url)
@@ -95,20 +64,20 @@ def export_bid(request, bid_id):
         
         #subprocess.call(['pdflatex', rendered_tpl])
         
-        #tempdir = tempfile.mkdtemp()
+        tempdir = tempfile.mkdtemp()
         
-        #for i in range(2):
-        process = Popen(['pdflatex', '-output-directory', crc_dir + '/crc/templates/latex', '--shell-escape'], stdin=PIPE)
-        process.communicate(rendered_tpl)
+        for i in range(2):
+            process = Popen(['pdflatex', '-output-directory', tempdir, '--shell-escape'], stdin=PIPE)
+            process.communicate(rendered_tpl)
         
-        #with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
-        #    pdf = f.read()
+        with open(os.path.join(tempdir, 'texput.pdf'), 'rb') as f:
+            pdf = f.read()
         
-        #r = HttpResponse(content_type='application/pdf')
+        r = HttpResponse(content_type='application/pdf')
         #r['Content-Disposition'] = 'attachment; filename=texput.pdf' #Downloadable pdf from the browser
-        #r.write(pdf)
-        #shutil.rmtree(tempdir)
-        return HttpResponse(200)
+        r.write(pdf)
+        shutil.rmtree(tempdir)
+        
     
     else:
         return HttpResponse(404)
