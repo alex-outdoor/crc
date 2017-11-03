@@ -42,6 +42,16 @@ def export_bid(request, bid_id):
         incentive_handling_total = data['incentive_handling_unit_cost'] * data['incentive_handling_qte']
         sub_total_incentive += incentive_handling_total
            
+        facility_rental_total = data['facility_rental_unit_cost'] * data['facility_rental_qte']
+        refreshments_respondent_total = data['refreshments_respondent_unit_cost'] * data['refreshments_respondent_qte']
+        
+        sub_total_facility = data['catering_client'] + refreshments_respondent_total + facility_rental_total
+        
+        moderation_total = data['moderation_unit_cost'] * data['moderation_qte']
+        sub_total_moderation = moderation_total + data['moderator_briefing'] + data['moderator_travel']
+        
+        sub_total_translation = data['simultaneous_translation'] + data['translation_cost']
+        
         context = {  
             'today': datetime.now(),
             'topic': data['topic'],
@@ -54,7 +64,13 @@ def export_bid(request, bid_id):
             'data': data,
             'sub_total_recruitment': sub_total_recruitment,
             'sub_total_incentive': sub_total_incentive,
-            'incentive_handling_total': incentive_handling_total
+            'incentive_handling_total': incentive_handling_total,
+            'facility_rental_total' : facility_rental_total,
+            'refreshments_respondent_total': refreshments_respondent_total,
+            'sub_total_facility': sub_total_facility,
+            'moderation_total': moderation_total,
+            'sub_total_moderation': sub_total_moderation,
+            'sub_total_translation': sub_total_translation,
         }
     
         template = 'pdf_bid.html'

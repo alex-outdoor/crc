@@ -20,8 +20,10 @@
   }
 
   table {
-    margin-top: 50px;
-    /* border: solid 1px black; */
+    margin-top: 40px;
+    /*border: solid 1px black;*/
+    width: 100%;
+    table-layout: fixed;
   }
 
   #date {
@@ -44,6 +46,18 @@
   }
   .right {
     text-align: right;
+  }
+  .center {
+    text-align: center;
+  }
+  .right {
+    text-align: right;
+  }
+  .big-space {
+    margin-top: 650px;
+  }
+  td { 
+    word-wrap: break-word; 
   }
   </style>
 {% endblock %}
@@ -69,54 +83,116 @@
       </ul>
       
       <!-- TITLE SECOND PAGE -->
-      <center id="title"> {{topic}} </center>
+      <center class="big-space" id="title"> {{topic}} </center>
+
       <!-- User entered SPECS -->
       <center id="specs"> {{bid_notes}} </center>
       <!-- Recruitment duration -->
       <center id="recruitment"> Please allow {{recruitment}} for recruitment </center>
       
+      
       <!-- MAIN COSTS TABLE -->
-      <table id="costs">
+      <table class="sturdy" id="costs">
         <!-- Currency of quote -->
         <tr>
-          <th colspan="3"> Currency of quote </th> <th> {{ data.currency }} </th>
+          <th colspan="3"> Currency of quote </th> <th class="center"> {{ data.currency }} </th>
         </tr>
         <tr height="20px"></tr>
         <!-- Recruitment -->
         {% if respondents %}
         <tr>
-          <th> Recruitment </th> <th> Cost per participant </th> <th> Number of participants </th> <th> Total </th>
+          <th> Recruitment </th> <th width="250px" class="center"> Cost per participant </th> <th width="200px" class="center"> Number of participants </th> <th width="100px" class="center"> Total </th>
         </tr>
         <tr height="10px"></tr>
         {% for respondent in respondents %}
           <tr>
-            <td> {{ respondent.type_respondent }} </td> <td> {{ respondent.recruitment_cost|floatformat:"0" }} </td> <td> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td> {{ respondent.recruitment_total|floatformat:"0" }} </td>
+            <td> {{ respondent.type_respondent }} </td> <td class="center"> {{ respondent.recruitment_cost|floatformat:"0" }} </td> <td class="center"> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td class="right"> {{ respondent.recruitment_total|floatformat:"0" }} </td>
           </tr>
         {% endfor %}
         <tr>
           <td class="right"> Sub-total recruitment </td> <td colspan="2"></td> <td> {{ sub_total_recruitment|floatformat:"0" }} </td>
         </tr>  
-        <tr height="20px"></tr>
         {% endif %}
         <!-- Incentives -->
         {% if respondents or data.incentive_handling_qte %}
+          <tr height="20px"></tr>
           <tr>
-            <th> Incentives </th> <th> Cost per participant </th> <th> Number of participants </th> <th> Total </th>
+            <th> Incentives </th> <th class="center"> Cost per participant </th> <th class="center"> Number of participants </th> <th class="center"> Total </th>
           </tr>
           <tr height="10px"></tr>
           {% for respondent in respondents %}
             <tr>
-              <td> {{ respondent.methodologies.0.duration }} / {{ respondent.type_respondent }} </td> <td> {{ respondent.incentive|floatformat:"0" }} </td> <td> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td> {{ respondent.incentive_total|floatformat:"0" }} </td>
+              <td> {{ respondent.methodologies.0.duration }} / {{ respondent.type_respondent }} </td> <td class="center"> {{ respondent.incentive|floatformat:"0" }} </td> <td class="center"> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td class="right"> {{ respondent.incentive_total|floatformat:"0" }} </td>
             </tr>
           {% endfor %}
 
         <tr>
-          <td> Incentive handling </td> <td colspan="2"></td> <td> {{ incentive_handling_total|floatformat:"0" }} </td>
+          <td> Incentive handling </td> <td colspan="2"></td> <td class="right"> {{ incentive_handling_total|floatformat:"0" }} </td>
         </tr>
         <tr>
-          <td class="right"> Sub-total incentives </td> <td colspan="2"></td> <td> {{ sub_total_incentive|floatformat:"0" }} </td>
+          <td class="right"> Sub-total incentives </td> <td colspan="2"></td> <td class="right"> {{ sub_total_incentive|floatformat:"0" }} </td>
         </tr>
         {% endif %}
+        <!-- Facility rentals -->
+        {% if sub_total_facility %}
+        <tr height="20px"></tr>
+        <tr>
+          <th> Facility rental - includes AV recordings</th> <th class="center"> Cost per day/city </th> <th class="center"> Number of day/city </th> <th class="center"> Total </th>
+        </tr>
+        <tr height="10px"></tr>
+        <tr>
+          <td> {{ data.facility_duration }} </td> <td class="center"> {{ data.facility_rental_unit_cost|floatformat:"0" }} </td> <td class="center"> {{ data.facility_rental_qte|floatformat:"0" }}  </td> <td class="right"> {{ facility_rental_total|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td> Respondent catering & refreshments </td> <td class="center"> {{ data.refreshments_respondent_unit_cost|floatformat:"0" }} </td> <td class="center"> {{ data.refreshments_respondent_qte|floatformat:"0" }}  </td> <td class="right"> {{ refreshments_respondent_total|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td> Attendee catering - Estimate only </td> <td colspan="2"></td> <td class="right"> {{ data.catering_client|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td class="right"> Sub-total facility </td> <td colspan="2"></td> <td class="right"> {{ sub_total_facility|floatformat:"0" }} </td>
+        </tr>
+        {% endif %}
+        
+        <!-- Moderation -->
+        {% if sub_total_moderation %}
+        <tr height="20px"></tr>
+        <tr>
+          <th> Moderation </th> <th class="center"> Cost per day/interview </th> <th class="center"> Number of days/interview </th> <th class="center"> Total </th>
+        </tr>
+        <tr height="10px"></tr>
+        <tr>
+          <td> INSERT DURATION </td> <td class="center"> {{ data.moderation_unit_cost|floatformat:"0" }} </td> <td class="center"> {{ data.moderation_qte|floatformat:"0" }}  </td> <td class="right"> {{ moderation_total|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td> Moderator briefing - debriefing </td> <td class="center"> xxx </td> <td class="center"> xxx </td> <td class="right"> {{ data.moderator_briefing|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td> Moderator travel - estimate only </td> <td colspan="2"></td> <td class="right"> {{ data.moderator_travel|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td class="right"> Sub-total moderation </td> <td colspan="2"></td> <td class="right"> {{ sub_total_moderation|floatformat:"0" }} </td>
+        </tr>
+        {% endif %}
+        
+        <!-- Translations -->
+        {% if sub_total_translation %}
+        <tr height="20px"></tr>
+        <tr>
+          <th> Translations </th> <th colspan="2"></th><th class="center"> Total </th>
+        </tr>
+        <tr height="10px"></tr>
+        <tr>
+          <td> Simultaneous translation </td> <td colspan="2"> </td> <td class="right"> {{ data.simultaneous_translation|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td colspan="2"> Translation of project materials. Estimate of {{ data.translation_words|floatformat:"0" }} words </td> <td></td> <td class="right"> {{ data.translation_cost|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td class="right"> Sub-total translation </td> <td colspan="2"></td> <td class="right"> {{ sub_total_translation|floatformat:"0" }} </td>
+        </tr>
+        {% endif %}
+        
       </table>
       
     </div>
