@@ -1,0 +1,14 @@
+<table id="translation_table" ng-show="show_trans" class="text-white">
+  <tr>
+    <td class='right'><label class="control-label">Words estimation</label></td>
+    <td><input class="form-control" type="number" name="translation_words" id="translation_words" value="{{ translation_words }}"></td>
+  </tr>
+  <tr>
+    <td class='right'><label class="control-label">Total</label></td>
+    <td><div class="input-group"><input class="form-control" type="number" value="{{ translation_total }}" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
+  </tr>
+  <tr>
+    <td> <label class="control-label">Simultaneous translation</label></td> 
+    <td> <div class="input-group"><input class="form-control" type="number" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td>
+  </tr>
+</table>

@@ -41,7 +41,7 @@ app.controller("FormController", [
               $("#city_@".replace("@", i)).val(respondents[i].city);
               $("#incentive_@".replace("@", i)).val(respondents[i].incentive);
               $("#duration_@".replace("@", i)).val(respondents[i].methodologies[0].duration);
-              $("#recruitment_cost_@".replace("@", i)).val(respondents[i].nbr_respondent);
+              $("#recruitment_cost_@".replace("@", i)).val(respondents[i].recruitment_cost);
               $("#language_@".replace("@", i)).val(respondents[i].language);
               $("#notes_respondent_@".replace("@", i)).val(respondents[i].notes);
 
@@ -111,20 +111,22 @@ app.controller("FormController", [
         get_clients();
       }
     };
-
-    $scope.show_deliverables = function() {
-      // Show the deliverables table
-      $scope.show_deliv = $scope.show_deliv ? false : true;
-    };
-
-    $scope.show_facility = function() {
-      // Show the facility table
-      $scope.show_facil = $scope.show_facil ? false : true;
-    };
-
-    $scope.show_moderation = function() {
-      // Show the moderation table
-      $scope.show_mod = $scope.show_mod ? false : true;
+    $scope.show = function(what) {
+      // Show/Hide the what table
+      switch (what) {
+        case "deliverables":
+          $scope.show_deliv = $scope.show_deliv ? false : true;
+          break;
+        case "translation":
+          $scope.show_trans = $scope.show_trans ? false : true;
+          break;
+        case "moderation":
+          $scope.show_mod = $scope.show_mod ? false : true;
+          break;
+        case "facility":
+          $scope.show_facil = $scope.show_facil ? false : true;
+          break;
+      }
     };
 
     $scope.add_respondent = function() {

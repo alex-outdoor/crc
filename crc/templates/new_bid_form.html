@@ -23,14 +23,10 @@
     <tr>
         <td> <label class="control-label required">Topic</label></td> 
         <td> <input class="form-control" type="text" id="topic" name="topic" value="{{ topic }}" required> </td>
-        <!-- <td> <label class="control-label">Moderator briefing-debriefing</label></td> 
-        <td> <div class="input-group"><input class="form-control" type="number" id="moderator_briefing" name="moderator_briefing" value="{{ moderator_briefing }}"> <span class="input-group-addon">$</span></div></td> -->
     </tr>
     <tr>
       <td><label class="control-label required">Currency of quote</label></td>
       <td><input type="text" class="form-control" name="currency" value="{{ currency }}" required></td>
-      <!-- <td> <label class="control-label"> Moderator travel (estimation only)</label> </td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="moderator_travel" value="{{ moderator_travel }}"> <span class="input-group-addon">$</span></div></td> -->
     </tr>
   <tr>
       <td> <label class="control-label required">Client (from database)</label></td> 
@@ -47,88 +43,45 @@
           {% endverbatim %}
       </td>
       {% endif %}
-      <!-- <td> <label class="control-label">Moderation : </label></td> 
-      <td></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Contact name</label></td> 
       <td> <input class="form-control" type="text" name="contact_name" value="{{ contact_name }}" required> </td>
-      <!-- <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="number" name="moderation_unit_cost" value="{{ moderation_unit_cost }}"><span class="input-group-addon">$</span></div></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Contact email</label></td> 
       <td> <input class="form-control" type="email" name="contact_email" value="{{ contact_email }}" required> </td>
-      <!-- <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="number" name="moderation_units" value="{{ moderation_units }}"></td> -->
   </tr>
   <tr>
       <td> <label class="control-label required">Recruitment allowed time</label></td> 
       <td> <input class="form-control" type="text" name="recruitment_duration" value="{{ recruitment_duration }}" required> </td>
-      <!-- <td> <label class="control-label">Simultaneous translation</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="simultaneous_translator" value="{{ simultaneous_translator }}"> <span class="input-group-addon">$</span></div></td> -->
-  </tr>
-  <!-- <tr>
-      <td> <label class="control-label required">Project management cost</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="project_management" value="{{ project_management }}" required> <span class="input-group-addon">$</span></div></td>
-      <td> <label class="control-label">Translation : </label></td> 
-      <td></td>
   </tr>
   <tr>
-      <td> <label class="control-label">Incentive handling :</label></td>
-      <td></td>
-      <td class='right'><label class="control-label">Words estimation</label></td>
-      <td><input class="form-control" type="number" name="translation_words" id="translation_words" value="{{ translation_words }}"></td>
-
+    <td> <label class="control-label">Incentive handling :</label></td>
+    <td></td>
   </tr>
   <tr>
-      <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="number" name="incentive_handling_unit_cost" value="{{ incentive_handling_unit_cost }}"><span class="input-group-addon">$</span></div></td>
-      <td class='right'><label class="control-label">Total</label></td>
-        <td><div class="input-group"><input class="form-control" type="number" value="{{ translation_total }}" id="translation_total" disabled><span class="input-group-addon">$</span></div></td>
+    <td class='right'><label class="control-label">Unit cost</label></td>
+    <td><div class="input-group"><input class="form-control" type="number" name="incentive_handling_unit_cost" value="{{ incentive_handling_unit_cost }}"><span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
     <td class='right'><label class="control-label">Nbr of unit(s)</label></td>
     <td><div class="input-group"><input class="form-control" type="number" name="incentive_handling_units" value="{{ incentive_handling_units }}"></div></td>
-    <td></td>
-    <td></td>
   </tr>
   <tr>
-      <td> <label class="control-label">Catering for client (estimation only)</label></td> 
-      <td> <div class="input-group"><input class="form-control" type="number" name="catering_client" value="{{ catering_client }}"> <span class="input-group-addon">$</span></div></td>
-      <td> <label class="control-label">Facility rentals : </label></td> 
-      <td></td>
+      <td> <label class="control-label required">Project management cost</label></td> 
+      <td> <div class="input-group"><input class="form-control" type="number" name="project_management" value="{{ project_management }}" required> <span class="input-group-addon">$</span></div></td>
   </tr>
   <tr>
-      <td> <label class="control-label">Refreshments for respondents :</label></td> 
-      <td></td>
-      <td class='right'><label class="control-label">Duration</label></td>
-      <td><input class="form-control" type="text" name="facility_duration" value="{{ facility_duration }}"></td>
+    <td colspan = "2"> <textarea class="form-control" name="notes_bid" rows="5" placeholder="This text will show at the top of the BID">{{notes}}</textarea> </td>
   </tr>
-  <tr>
-      <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="number" name="refreshment_unit_cost" value="{{ refreshments_respondent_unit_cost }}"><span class="input-group-addon">$</span></div></td>
-      <td class='right'><label class="control-label">Unit cost</label></td>
-      <td><div class="input-group"><input class="form-control" type="number" name="facility_unit_cost" value="{{ facility_unit_cost }}"><span class="input-group-addon">$</span></div></td>
-  </tr>
-  <tr>
-      <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="number" name="refreshment_units" value="{{ refreshments_respondent_units }}"></td>
-      <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
-      <td><input class="form-control" type="number" name="facility_units" value="{{ facility_units }}"></td>
-  </tr>
-  <tr>
-      <td colspan = "4"> <textarea class="form-control" name="notes_bid" rows="5" placeholder="Notes about the BID">{{notes}}</textarea> </td>
-  </tr> -->
 </table>
 
-  <!-- When editing - respondent infos are fetched throught the API -->
-  
   <!-- RECRUITMENT -->
+  <!-- When editing - respondent infos are fetched throught the API -->
   <button id="respondent_button_add" type="button" ng-click="add_respondent()" class="btn btn-secondary bid_button">Add recruitment form</button>
   <button id="respondent_button_remove" type="button" ng-click="remove_respondent()" class="btn btn-secondary bid_button">Remove last recruitment form (data will be lost)</button>
   <div ng-repeat="i in qte">
-    
     {% verbatim %}
       <!-- For django view to easy know how many respondent groups -->
       <input class="hidden" name="saved_groups" value="{{ qte.length }}">
@@ -137,28 +90,36 @@
     {% include "new_respondent.html" %}
   </div>
   <br>
-  <!-- FACILITY RENTALS -->
-  <button id="facility_button" type="button" ng-click="show_facility()" class="btn btn-secondary bid_button">Facility rentals</button>
+  
+  <!-- FACILITY RENTALS AND CATERING -->
+  <button id="facility_button" type="button" ng-click="show('facility')" class="btn btn-secondary bid_button">Facility rentals & Catering</button>
     {% include "facility_rentals.html" %}
   <br>
   
   <!-- MODERATION -->
-  <button id="moderation_button" type="button" ng-click="show_moderation()" class="btn btn-secondary bid_button">Moderation</button>
+  <button id="moderation_button" type="button" ng-click="show('moderation')" class="btn btn-secondary bid_button">Moderation</button>
     {% include "moderation.html" %}
   <br>
   
+  <!-- TRANSLATION -->
+  <button id="translation_button" type="button" ng-click="show('translation')" class="btn btn-secondary bid_button">Translation</button>
+    {% include "translation.html" %}
+  <br>
+  
   <!-- DELIVERABLES -->
-  <button id="deliverable_button" type="button" ng-click="show_deliverables()" class="btn btn-secondary bid_button">Deliverables</button>
+  <button id="deliverable_button" type="button" ng-click="show('deliverables')" class="btn btn-secondary bid_button">Deliverables</button>
     {% include "deliverables.html" %}
   <br>
   
+  <!-- SUBMIT BUTTONS -->
   {% if bid_id %}
-  <!-- Editing button -->
+    <!-- Editing button -->
     <button id="save" type="submit" class="btn btn-primary">Save changes</button>
   {% else %}
     <!-- Saving button -->
     <button id="save" type="submit" class="btn btn-primary">Save</button>
   {% endif %}
+  
 </form>
 </div>
 {% endblock %}

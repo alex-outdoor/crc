@@ -220,6 +220,10 @@ class Respondent(Base):
         help_text="Incentive per respondent")
     recruitment_cost = models.FloatField(blank=True, null=True,
         help_text="Recruitment cost per respondent")
+    recruitment_total = models.FloatField(blank=True, null=True,
+        help_text="Recruitment total")
+    incentive_total = models.FloatField(blank=True, null=True,
+        help_text="Incentive total")
     notes = models.TextField(blank=True, null=True,
         help_text="Notes")
 
@@ -234,6 +238,8 @@ class Respondent(Base):
         self.incentive = float(get_attribute_value(data,'incentive_'+index))
         self.recruitment_cost = float(get_attribute_value(data,'recruitment_cost_'+index))
         self.notes = data.get('notes_respondent_'+index, '')
+        self.recruitment_total = (self.nbr_respondent + self.over_recruitment) * self.recruitment_cost
+        self.incentive_total = (self.nbr_respondent + self.over_recruitment) * self.incentive
         return self
         
     def __str__(self):

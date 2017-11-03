@@ -1,58 +1,122 @@
 {% load staticfiles %}
 
 {% block styles %}
-    <style type="text/css">
-        #content {
-            font-family: "Helvetica", "sans-serif";
-            color: #333333;
-        }
-        #logo {
-          width: 200px;
-        }
-        #title {
-          text-align: center;
-          font-size: 200%;
-        }
-        
-        table {
-          margin-top: 50px;
-        }
-        
-        #client {
-          width: 200px;
-        }
+  <style type="text/css">
+  #content {
+    font-family: "Helvetica", "sans-serif";
+    color: #333333;
+    font-size: 150%;
+  }
+  #logo {
+    width: 200px;
+  }
+  #title {
+    text-align: center;
+    font-size: 180%;
+  }
+  #specs {
+    text-align: center;
+    font-size: 120%;
+  }
 
-        
-    </style>
+  table {
+    margin-top: 50px;
+    /* border: solid 1px black; */
+  }
+
+  #date {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    padding-top: 100px;
+    margin-top: 10px; /* spacing btw elements */
+  }
+
+  li {
+    padding: 0;
+    list-style-type: none; /* no bullet */
+  }
+  th{
+    background-color: lightgray;
+    text-align: left;
+    padding-top: 5px; /* text centered vertically */
+  }
+  .right {
+    text-align: right;
+  }
+  </style>
 {% endblock %}
 
 {% block content %}
     <div id="content">
-
-      <img id="logo" src="{% static '/img/logo.jpg' %}"/>
+      <!-- This needs an absolute path for the pdf rendering (locally) -->
+      <img id="logo" src="/Users/athissen/documents/crc/crc/exporter/static/img/logo.jpg">
+      <!-- This will work on prod -->
+      <!-- <img id="logo" src="/static/img/logo.jpg"> -->
+      
+      <!-- TITLE FIRST PAGE -->
       <center id="title"> {{topic}} </center>
+
+      <ul id="date">
+          <li> {{ today|date:"M d, Y" }} </li>
+      </ul>      
       
-      <table id="client">
-        <tr>
-          <td> Company </td> <td> {{ company }} </td>
-        </tr>
-        <tr>
-          <td> Contact name </td> <td> {{ contact_name }} </td>
-        </tr>
-        <tr>
-          <td> Contact email </td> <td> {{ contact_email }} </td>
-        </tr>
-      </table>
+      <ul id="client_info">
+          <li> {{ company }} </li>
+          <li> {{ contact_name }} </li>
+          <li> {{ contact_email }} </li>
+      </ul>
       
-      <table id="respondents">
+      <!-- TITLE SECOND PAGE -->
+      <center id="title"> {{topic}} </center>
+      <!-- User entered SPECS -->
+      <center id="specs"> {{bid_notes}} </center>
+      <!-- Recruitment duration -->
+      <center id="recruitment"> Please allow {{recruitment}} for recruitment </center>
+      
+      <!-- MAIN COSTS TABLE -->
+      <table id="costs">
+        <!-- Currency of quote -->
         <tr>
-          <td> Type of participant </td> <td> Cost per participant </td> <td> Number of participant </td> <td> Total </td>
+          <th colspan="3"> Currency of quote </th> <th> {{ data.currency }} </th>
         </tr>
+        <tr height="20px"></tr>
+        <!-- Recruitment -->
+        {% if respondents %}
+        <tr>
+          <th> Recruitment </th> <th> Cost per participant </th> <th> Number of participants </th> <th> Total </th>
+        </tr>
+        <tr height="10px"></tr>
         {% for respondent in respondents %}
           <tr>
-            <td> {{ respondent.type_respondent }} </td> <td> {{ respondent.recruitment_cost }} </td> <td> {{ respondent.nbr_respondent }} </td> <td> total </td>
+            <td> {{ respondent.type_respondent }} </td> <td> {{ respondent.recruitment_cost|floatformat:"0" }} </td> <td> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td> {{ respondent.recruitment_total|floatformat:"0" }} </td>
           </tr>
         {% endfor %}
+        <tr>
+          <td class="right"> Sub-total recruitment </td> <td colspan="2"></td> <td> {{ sub_total_recruitment|floatformat:"0" }} </td>
+        </tr>  
+        <tr height="20px"></tr>
+        {% endif %}
+        <!-- Incentives -->
+        {% if respondents or data.incentive_handling_qte %}
+          <tr>
+            <th> Incentives </th> <th> Cost per participant </th> <th> Number of participants </th> <th> Total </th>
+          </tr>
+          <tr height="10px"></tr>
+          {% for respondent in respondents %}
+            <tr>
+              <td> {{ respondent.methodologies.0.duration }} / {{ respondent.type_respondent }} </td> <td> {{ respondent.incentive|floatformat:"0" }} </td> <td> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td> {{ respondent.incentive_total|floatformat:"0" }} </td>
+            </tr>
+          {% endfor %}
+
+        <tr>
+          <td> Incentive handling </td> <td colspan="2"></td> <td> {{ incentive_handling_total|floatformat:"0" }} </td>
+        </tr>
+        <tr>
+          <td class="right"> Sub-total incentives </td> <td colspan="2"></td> <td> {{ sub_total_incentive|floatformat:"0" }} </td>
+        </tr>
+        {% endif %}
       </table>
       
     </div>

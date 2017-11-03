@@ -1,0 +1,29 @@
+#content {
+  font-family: "Helvetica", "sans-serif";
+  color: #333333;
+}
+#logo {
+  width: 200px;
+}
+#title {
+  text-align: center;
+  font-size: 300%;
+}
+
+table {
+  margin-top: 50px;
+}
+
+#date {
+  margin-bottom: 10px;
+}
+
+ul {
+  padding-top: 100px;
+  margin-top: 10px; /* spacing btw elements */
+}
+
+li {
+  padding: 0;
+  list-style-type: none; /* no bullet */
+}

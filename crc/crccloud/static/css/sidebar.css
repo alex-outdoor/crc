@@ -1,25 +1,26 @@
-
 /* Sidebar styling */
 #sidebar {
-  position: fixed; 
+  position: fixed;
   float: left;
   height: 100%;
   width: 250px;
 }
 
 img {
-  width: 100%;
+  width: 150px;
   margin-top: 20px;
   margin-left: 20px;
 }
 
 #sidebar_ul {
-  margin-top: 80px; /* Logo from menu buttons */
+  margin-top: 40px; /* Logo from menu buttons */
   list-style-type: none; /* no bullet */
+  padding: 0;
+  margin-left: 20px; /* Align with logo */
 }
 
 li {
-  margin-bottom: 30px; /* Spacing btw buttons */
+  margin-bottom: 10px; /* Spacing btw buttons */
   width: 100%;
 }
 

@@ -1,5 +1,9 @@
 <table id="facility_rentals_table" ng-show="show_facil" class="text-white">
   <tr>
+    <td> <label class="control-label">Facility rentals :</label></td>
+    <td></td>
+  </tr>
+  <tr>
     <td class='right'><label class="control-label">Duration</label></td><td><input class="form-control" type="text" name="facility_duration" value="{{ facility_duration }}"></td>
   </tr>
   <tr>
@@ -7,6 +11,20 @@
   </tr>
   <tr>
     <td class='right'><label class="control-label">Nbr of unit(s)</label></td> <td><input class="form-control" type="number" name="facility_units" value="{{ facility_units }}"></td>
+  </tr>
+  <tr>
+    <td> <label class="control-label">Catering for client (estimation only)</label></td> 
+    <td> <div class="input-group"><input class="form-control" type="number" name="catering_client" value="{{ catering_client }}"> <span class="input-group-addon">$</span></div></td>
+  </tr>
+  <td> <label class="control-label">Refreshments for respondents :</label></td> 
+  <td></td>
+  <tr>
+    <td class='right'><label class="control-label">Unit cost</label></td>
+    <td><div class="input-group"><input class="form-control" type="number" name="refreshment_unit_cost" value="{{ refreshments_respondent_unit_cost }}"><span class="input-group-addon">$</span></div></td>
+  </tr>
+  <tr>
+    <td class='right'><label class="control-label">Nbr of unit(s)</label></td> 
+    <td><input class="form-control" type="number" name="refreshment_units" value="{{ refreshments_respondent_units }}"></td>
   </tr>
 </table>
 
