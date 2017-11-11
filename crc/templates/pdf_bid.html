@@ -5,7 +5,7 @@
   #content {
     font-family: "Helvetica", "sans-serif";
     color: #333333;
-    font-size: 150%;
+    font-size: 11pt;
   }
   #logo {
     width: 200px;
@@ -20,8 +20,7 @@
   }
 
   table {
-    margin-top: 40px;
-    /*border: solid 1px black;*/
+    margin-top: 20px;
     width: 100%;
     table-layout: fixed;
   }
@@ -40,9 +39,14 @@
     list-style-type: none; /* no bullet */
   }
   th{
-    background-color: lightgray;
+    /* background-color: lightgray; */
+    border: solid 1px black;
+    padding-bottom: -2px;
+    padding-top: 4px;  /* text centered vertically */
+  }
+  th.left{
     text-align: left;
-    padding-top: 5px; /* text centered vertically */
+    padding-left: 5px;
   }
   .right {
     text-align: right;
@@ -56,8 +60,14 @@
   .big-space {
     margin-top: 650px;
   }
-  td { 
-    word-wrap: break-word; 
+  td {
+    word-wrap: break-word;
+    padding-top: 1px;
+    padding-bottom: -3px;
+  }
+  @page {
+    size: letter landscape;
+    margin: 1cm
   }
   </style>
 {% endblock %}
@@ -65,23 +75,24 @@
 {% block content %}
     <div id="content">
       <!-- This needs an absolute path for the pdf rendering (locally) -->
-      <img id="logo" src="/Users/athissen/documents/crc/crc/exporter/static/img/logo.jpg">
+      <!-- <img id="logo" src="/Users/athissen/documents/crc/crc/exporter/static/img/logo.jpg"> -->
+      <img id="logo" src="/Users/alex/documents/crc/crc/exporter/static/img/logo.jpg">
       <!-- This will work on prod -->
       <!-- <img id="logo" src="/static/img/logo.jpg"> -->
-      
+
       <!-- TITLE FIRST PAGE -->
       <center id="title"> {{topic}} </center>
 
       <ul id="date">
           <li> {{ today|date:"M d, Y" }} </li>
-      </ul>      
-      
+      </ul>
+
       <ul id="client_info">
           <li> {{ company }} </li>
           <li> {{ contact_name }} </li>
           <li> {{ contact_email }} </li>
       </ul>
-      
+
       <!-- TITLE SECOND PAGE -->
       <center class="big-space" id="title"> {{topic}} </center>
 
@@ -89,35 +100,35 @@
       <center id="specs"> {{bid_notes}} </center>
       <!-- Recruitment duration -->
       <center id="recruitment"> Please allow {{recruitment}} for recruitment </center>
-      
-      
+
+
       <!-- MAIN COSTS TABLE -->
       <table class="sturdy" id="costs">
         <!-- Currency of quote -->
         <tr>
-          <th colspan="3"> Currency of quote </th> <th class="center"> {{ data.currency }} </th>
+          <th class="left" colspan="3"> Currency of quote </th> <th class="center"> {{ data.currency }} </th>
         </tr>
-        <tr height="20px"></tr>
+        <tr height="2px"></tr>
         <!-- Recruitment -->
         {% if respondents %}
         <tr>
-          <th> Recruitment </th> <th width="250px" class="center"> Cost per participant </th> <th width="200px" class="center"> Number of participants </th> <th width="100px" class="center"> Total </th>
+          <th class="left"> Recruitment </th> <th width="250px" class="center"> Cost per participant </th> <th width="200px" class="center"> Number of participants </th> <th width="100px" class="center"> Total </th>
         </tr>
-        <tr height="10px"></tr>
+        <tr height="2px"></tr>
         {% for respondent in respondents %}
           <tr>
             <td> {{ respondent.type_respondent }} </td> <td class="center"> {{ respondent.recruitment_cost|floatformat:"0" }} </td> <td class="center"> {{ respondent.nbr_respondent|floatformat:"0" }} + {{ respondent.over_recruitment|floatformat:"0" }} </td> <td class="right"> {{ respondent.recruitment_total|floatformat:"0" }} </td>
           </tr>
         {% endfor %}
         <tr>
-          <td class="right"> Sub-total recruitment </td> <td colspan="2"></td> <td> {{ sub_total_recruitment|floatformat:"0" }} </td>
-        </tr>  
+          <td class="right"> Sub-total recruitment </td> <td colspan="2"></td> <td class="right"> {{ sub_total_recruitment|floatformat:"0" }} </td>
+        </tr>
         {% endif %}
         <!-- Incentives -->
         {% if respondents or data.incentive_handling_qte %}
-          <tr height="20px"></tr>
+          <tr height="10px"></tr>
           <tr>
-            <th> Incentives </th> <th class="center"> Cost per participant </th> <th class="center"> Number of participants </th> <th class="center"> Total </th>
+            <th class="left"> Incentives </th> <th class="center"> Cost per participant </th> <th class="center"> Number of participants </th> <th class="center"> Total </th>
           </tr>
           <tr height="10px"></tr>
           {% for respondent in respondents %}
@@ -135,9 +146,9 @@
         {% endif %}
         <!-- Facility rentals -->
         {% if sub_total_facility %}
-        <tr height="20px"></tr>
+        <tr height="10px"></tr>
         <tr>
-          <th> Facility rental - includes AV recordings</th> <th class="center"> Cost per day/city </th> <th class="center"> Number of day/city </th> <th class="center"> Total </th>
+          <th class="left"> Facility rental - includes AV recordings</th> <th class="center"> Cost per day/city </th> <th class="center"> Number of day/city </th> <th class="center"> Total </th>
         </tr>
         <tr height="10px"></tr>
         <tr>
@@ -153,12 +164,12 @@
           <td class="right"> Sub-total facility </td> <td colspan="2"></td> <td class="right"> {{ sub_total_facility|floatformat:"0" }} </td>
         </tr>
         {% endif %}
-        
+
         <!-- Moderation -->
         {% if sub_total_moderation %}
-        <tr height="20px"></tr>
+        <tr height="10px"></tr>
         <tr>
-          <th> Moderation </th> <th class="center"> Cost per day/interview </th> <th class="center"> Number of days/interview </th> <th class="center"> Total </th>
+          <th class="left"> Moderation </th> <th class="center"> Cost per day/interview </th> <th class="center"> Number of days/interview </th> <th class="center"> Total </th>
         </tr>
         <tr height="10px"></tr>
         <tr>
@@ -174,12 +185,12 @@
           <td class="right"> Sub-total moderation </td> <td colspan="2"></td> <td class="right"> {{ sub_total_moderation|floatformat:"0" }} </td>
         </tr>
         {% endif %}
-        
+
         <!-- Translations -->
         {% if sub_total_translation %}
-        <tr height="20px"></tr>
+        <tr height="10px"></tr>
         <tr>
-          <th> Translations </th> <th colspan="2"></th><th class="center"> Total </th>
+          <th class="left"> Translations </th> <th colspan="2"></th><th class="center"> Total </th>
         </tr>
         <tr height="10px"></tr>
         <tr>
@@ -192,8 +203,8 @@
           <td class="right"> Sub-total translation </td> <td colspan="2"></td> <td class="right"> {{ sub_total_translation|floatformat:"0" }} </td>
         </tr>
         {% endif %}
-        
+
       </table>
-      
+
     </div>
 {% endblock %}
