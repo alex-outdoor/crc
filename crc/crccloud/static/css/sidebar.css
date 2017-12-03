@@ -7,8 +7,8 @@
 }
 
 img {
-  width: 150px;
-  margin-top: 20px;
+  width: 230px;
+  margin-top: 10px;
   margin-left: 20px;
 }
 
@@ -25,7 +25,7 @@ li {
 }
 
 #main {
-  margin-left: 250px;
+  margin-left: 230px;
 }
 
 /* Login/Register styling */
