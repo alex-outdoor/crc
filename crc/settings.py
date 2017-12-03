@@ -125,7 +125,7 @@ REST_FRAMEWORK = {
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ], 
+    ],
     'PAGE_SIZE': 100
 }
 
@@ -166,4 +166,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Dir from where the static files will be served in production
+# python manage.py collectstatic collects all static content in that dir
 STATIC_ROOT = os.path.join(BASE_DIR, "static/")
